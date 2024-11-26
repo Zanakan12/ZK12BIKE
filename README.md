@@ -141,44 +141,15 @@ Accédez à l'application à l'adresse : [http://localhost:8080](http://localhos
 - [ ] Tests et déploiement.
 
 ---
-
+V
 ## 📖 **Documentation technique**
 - **Framework choisi :** Gin/Echo pour les routes web.
 - **Modèle de données :** Voir la section UML ci-dessous.
 
 ---
 
-## 🖼️ **Diagramme UML (Architecture de la base de données)**
+## 🖼️ **Diagramme UML [Architecture de la base de données](https://dbdiagram.io/d/dbZK12EBIKE-6745d6fae9daa85acac4d8a6)**
 
-Voici un diagramme de la structure relationnelle de ta base de données :
-
-- **Table `users` :**
-  - `id` (PK)
-  - `name`
-  - `email`
-  - `password`
-  - `created_at`
-
-- **Table `bikes` :**
-  - `id` (PK)
-  - `name`
-  - `type` (route, VTT, électrique...)
-  - `price` (location/achat)
-  - `status` (disponible, loué, vendu)
-  - `created_at`
-
-- **Table `orders` :**
-  - `id` (PK)
-  - `user_id` (FK)
-  - `bike_id` (FK)
-  - `type` (location/achat)
-  - `start_date` (pour location)
-  - `end_date` (pour location)
-  - `total_price`
-  - `status` (en attente, validé)
-  - `created_at`
-
----
 
 ## 🤝 **Contribuer**
 Si vous souhaitez contribuer :
