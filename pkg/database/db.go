@@ -10,6 +10,9 @@ func SetupDatabase() *sql.DB {
 	if err != nil {
 		log.Fatal(err)
 	}
+    createUsersTable(db)
+    createBikesTable(db)
+    createOrderTable(db)
 	return db
 }
 

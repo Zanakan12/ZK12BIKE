@@ -1,6 +1,7 @@
 // Placeholder for Go file.
+package users
 
-struct Users struct{
+type Users struct{
 	id 			int
 	name 		string
 	email 		string
