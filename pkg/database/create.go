@@ -2,42 +2,47 @@ package database
 
 import "database/sql"
 
+// Créer la table des utilisateurs
 func createUsersTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS users (
-		user_id INTEGER NOT NULL UNIQUE,
-		name TEXTE NOT NULL,
-		email TEXTE NOT NULL,
-		password TEXTE NOT NULL,
-		created_at TIMESAMP DEFAULT CURRENT_TIMESAMP
+		user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT NOT NULL,
+		email TEXT NOT NULL UNIQUE,
+		password TEXT NOT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);`
 
 	executeSQL(db, createTableSQL)
 }
 
-func createOrderTable(db *sql.DB) {
-	createTableSQL := `CREATE TABLE IF NOT EXISTS order (
-		id INTEGER NOT NULL UNIQUE,
-		users_id INTEGER NOT NULL UNIQUE,
-		bike_id	INTEGER NOT NULL UNIQUE,
+// Créer la table des commandes
+func createOrdersTable(db *sql.DB) {
+	createTableSQL := `CREATE TABLE IF NOT EXISTS orders (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		bike_id INTEGER NOT NULL,
 		bike_type TEXT NOT NULL,
-		start_date TIMESAMP DEFAULT CURRENT_TIMESAMP
-		end_date	TIMESAMP DEFAULT CURRENT_TIMESAMP
-		total_price float64
-		status	TEXT NOT NULL,
-		created_at TIMESAMP DEFAULT CURRENT_TIMESAMP
+		start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		total_price REAL,
+		status TEXT NOT NULL DEFAULT 'Disponible',
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		FOREIGN KEY (user_id) REFERENCES users(user_id),
+		FOREIGN KEY (bike_id) REFERENCES bikes(id)
 	);`
 
 	executeSQL(db, createTableSQL)
 }
 
+// Créer la table des vélos
 func createBikesTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS bikes (
-		id INTEGER NOT NULL UNIQUE,
-		name TEXTE NOT NULL,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT NOT NULL,
 		bike_type TEXT NOT NULL,
-		price FLOAT64,
-		status TEXT NOT NULL,
-		created_at TIMESAMP DEFAULT CURRENT_TIMESAMP
+		price REAL,
+		status TEXT NOT NULL DEFAULT 'DISPONIBLE',
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);`
 
 	executeSQL(db, createTableSQL)

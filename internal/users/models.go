@@ -1,4 +1,3 @@
-// Placeholder for Go file.
 package users
 
 type Users struct{

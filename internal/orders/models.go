@@ -1,4 +1,5 @@
-// Placeholder for Go file.
+package orders
+
 type Order struct{
 	id int
 	user_id int

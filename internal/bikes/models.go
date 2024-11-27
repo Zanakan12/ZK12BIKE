@@ -1,4 +1,4 @@
-// Placeholder for Go file.
+package bikes
 
 type Bikes struct {
 	id int

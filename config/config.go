@@ -1,1 +1,1 @@
-// Placeholder for Go file.
+package config
