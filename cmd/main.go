@@ -10,6 +10,10 @@ const port = ":8080"
 
 func main() {
 
+	//Serve the static directory
+	fs := http.FileServer(http.Dir("../static"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	//start the the server :
 	http.HandleFunc("/", home.HomeHandler)
 
