@@ -3,7 +3,8 @@ package database
 import (
 	"database/sql"
 	"log"
-    _ "github.com/mattn/go-sqlite3"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func SetupDatabase() *sql.DB {
@@ -11,9 +12,9 @@ func SetupDatabase() *sql.DB {
 	if err != nil {
 		log.Fatal(err)
 	}
-    createUsersTable(db)
-    createBikesTable(db)
-    createOrdersTable(db)
+	createUsersTable(db)
+	createBikesTable(db)
+	createOrdersTable(db)
 	return db
 }
 

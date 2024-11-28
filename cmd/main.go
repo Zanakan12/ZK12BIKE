@@ -16,6 +16,7 @@ func main() {
 
 	//start the the server :
 	http.HandleFunc("/", home.HomeHandler)
+	//http.HandleFunc("/register",users.RegisterHandler)
 
 	// route to handlers make the route before the running server
 	fmt.Println("The server is start on http://localhost" + port)

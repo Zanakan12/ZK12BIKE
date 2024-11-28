@@ -1,5 +1,4 @@
-
-/* ===========================body=========================== */
+/* =========================== Body =========================== */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -14,25 +13,24 @@ body {
     display: block;
     border-radius: 10% / 50%;
 }
-.right-item {
-    position: absolute;
-    top: 500px; /* Ajuste en fonction de ton besoin */
-    left: 0;
-}
-.parent-container {
-    position: relative; /* Ajoute une position relative au conteneur parent */
-}
 
 .left-item {
     position: absolute;
     top: 500px; /* Ajuste en fonction de ton besoin */
-    right: 0;
+    left: 100px; /* Correction: ajout px */
 }
+
 .parent-container {
     position: relative; /* Ajoute une position relative au conteneur parent */
 }
-/* ==========================navbar========================== */
 
+.right-item {
+    position: absolute;
+    top: 500px; /* Ajuste en fonction de ton besoin */
+    right: 0;
+}
+
+/* ========================== Navbar =========================== */
 .navbar {
     background-color: #7e7d7d;
     padding: 1rem;
@@ -41,7 +39,7 @@ body {
 
 .navbar-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -49,6 +47,7 @@ body {
 
 .navbar-logo {
     text-decoration: none;
+    margin-right: auto; /* Le logo est aligné à gauche */
 }
 
 .logo-img {
@@ -82,23 +81,34 @@ body {
     transform: scale(1.1);
 }
 
-/* Style pour les liens Log in et Log out */
-.navbar-container ul {
+/* ========================== Auth Section ========================== */
+.auth-section {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 30px;
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.auth-menu {
     list-style: none;
     display: flex;
     gap: 1rem;
     margin: 0;
     padding: 0;
+    position: absolute;
+    top: 50px; /* Ajuste en fonction de ton besoin */
+    right: 50px; /* Correction: ajout px */
 }
 
-.navbar-container ul a {
-    color: #ffffff;
+.auth-menu a {
+    color: #000;
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s;
 }
 
-.navbar-container ul a:hover {
+.auth-menu a:hover {
     color: #12f321;
 }
 
@@ -106,14 +116,8 @@ body {
 .fa-shopping-cart {
     margin-right: 0.5rem;
 }
-.log{
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-    border-radius: 90px;
-    border-top-left-radius: 50%;
-}
 
-/* Footer styling */
+/* ========================== Footer ========================== */
 footer {
     background-color: #333;
     color: #ffffff;
@@ -124,17 +128,20 @@ footer {
     width: 100%;
 }
 
-/* Responsive Navbar */
+/* ========================== Responsive Navbar ========================== */
 @media (max-width: 768px) {
     .navbar-container {
         flex-direction: column;
+        align-items: center;
     }
+
     .navbar-menu {
         flex-direction: column;
         gap: 1rem;
         align-items: center;
     }
-    .navbar-container ul {
+
+    .auth-menu {
         flex-direction: column;
         align-items: center;
     }
@@ -144,12 +151,15 @@ footer {
     .navbar-logo {
         font-size: 1.5rem;
     }
+
     .navbar-menu a {
         font-size: 0.9rem;
     }
-    .navbar-container ul a {
+
+    .auth-menu a {
         font-size: 0.9rem;
     }
+
     .logo-img {
         height: 40px;
     }

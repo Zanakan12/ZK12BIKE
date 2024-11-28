@@ -1,9 +1,12 @@
-<!-- templates/navbar.html -->
 <nav class="navbar">
+    <!-- Conteneur principal de la barre de navigation -->
     <div class="navbar-container">
+        <!-- Logo du site avec un lien vers la page d'accueil -->
         <a href="/" class="navbar-logo">
             <img src="/static/images/logo.png" alt="eBike Logo" class="logo-img">
         </a>
+
+        <!-- Menu de navigation principal -->
         <ul class="navbar-menu">
             <li><a href="/">Accueil</a></li>
             <li><a href="/velos-a-louer">Vélos à Louer</a></li>
@@ -14,9 +17,16 @@
             <li><a href="/contact">Contact</a></li>
             <li><a href="/faq">FAQ</a></li>
             <li><a href="/mon-compte">Mon Compte</a></li>
+            <!-- Panier avec une icône de caddie -->
             <li><a href="/panier"><i class="fa fa-shopping-cart"></i> Panier</a></li>
-            <li class"log"><a  href="/login">Log in</a></li>
-            <li class="log"><a href="/logout">Log out</a></li>
+        </ul>
+    </div>
+
+    <!-- Section pour la connexion/déconnexion -->
+    <div class="auth-section">
+        <ul class="auth-menu">
+            <li><a href="/login">CONNEXION</a></li>
+            <li><a href="/logout">DÉCONNEXION</a></li>
         </ul>
     </div>
 </nav>
