@@ -6,8 +6,13 @@
             <img src="/static/images/logo.png" alt="eBike Logo" class="logo-img">
         </a>
 
+        <!-- Bouton du menu hamburger -->
+        <button class="hamburger-menu" id="hamburger-menu">
+            ☰
+        </button>
+
         <!-- Menu de navigation principal -->
-        <ul class="navbar-menu">
+        <ul class="navbar-menu" id="navbar-menu">
             <li><a href="/">Accueil</a></li>
             <li><a href="/velos-a-louer">Vélos à Louer</a></li>
             <li><a href="/velos-a-vendre">Vélos à Vendre</a></li>
@@ -16,17 +21,21 @@
             <li><a href="/a-propos">À Propos</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/faq">FAQ</a></li>
-            <li><a href="/mon-compte">Mon Compte</a></li>
+            <div class="auth">
+                {{if .Session.Username}}
+                    <li><a href="/mon-compte">Mon Compte</a></li>
+                    <li><a href="/logout">DÉCONNEXION</a></li>
+                {{else}}
+                    <li><a href="/login">CONNEXION</a></li>
+                {{end}}
+            </div>
             <!-- Panier avec une icône de caddie -->
-            <li><a href="/panier"><i class="fa fa-shopping-cart"></i> Panier</a></li>
-        </ul>
-    </div>
-
-    <!-- Section pour la connexion/déconnexion -->
-    <div class="auth-section">
-        <ul class="auth-menu">
-            <li><a href="/login">CONNEXION</a></li>
-            <li><a href="/logout">DÉCONNEXION</a></li>
+            <li>
+                <a href="/panier">
+                    <img src="/static/images/caddie.png" alt="Logo Panier" class="panier-icon">
+                    Panier
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

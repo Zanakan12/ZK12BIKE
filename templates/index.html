@@ -1,9 +1,12 @@
 <!-- templates/index.html -->
-{{ define "index" }}
+{{ define "title" }}Page d'Accueil{{ end }}
+
+{{ define "content" }}
+<p>Bonjour, {{if .Session.Username}} {{.Session.Username}}!{{else}}Voyageur !{{end}}</p>
 <div class="left-item">
     <h1>LOCATION </br>EBIKE</h2>
     <p>Bienvenue sur notre page d'accueil.</br> Ici, vous trouverez des informations</br> sur nos services et notre entreprise.</p>
-    <p><a href="/register" class="register-link">Commencer Maintenant" </a></p>
+    <p><a href="/register" class="register-link">Commencer Maintenant</a></p>
 </div>
 
 <div align="center">

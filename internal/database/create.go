@@ -6,7 +6,7 @@ import "database/sql"
 func createUsersTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS users (
 		user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT NOT NULL,
+		username TEXT NOT NULL,
 		email TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -38,7 +38,7 @@ func createOrdersTable(db *sql.DB) {
 func createBikesTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS bikes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT NOT NULL,
+		username TEXT NOT NULL,
 		bike_type TEXT NOT NULL,
 		price REAL,
 		status TEXT NOT NULL DEFAULT 'DISPONIBLE',
