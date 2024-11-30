@@ -15,12 +15,15 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session := cookies.GetCookie(w,r)
-	
+	username := "Bikers"
+	if session.Username !=""{
+		username = session.Username
+	}
 	// Les données à passer au template
 	data := Pageinfo{
 		Title: "Page d'accueil",
 		Page: "home",
-		Session: session,
+		Username: username,
 	}
 
 	// Exécution du template

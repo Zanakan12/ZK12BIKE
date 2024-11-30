@@ -2,6 +2,7 @@
 
 {{ define "content" }}
 <body>
+    <h1 class="hello">Bonjour, {{ .Username}} !</h1>
     <div class="main-content-container">
         <!-- Section principale gauche -->
         <div class="left-section">
@@ -13,6 +14,15 @@
                 <a href="#"><img src="/static/images/playstore.png" alt="Play Store"></a>
                 <a href="#"><img src="/static/images/appstore.png" alt="App Store"></a>
             </div>
+        </div>
+        <!-- clignotant au dessus de la photo-->
+        <div class="arrow-container">
+            <table><thead>
+                <tr>
+                    <td><div class="arrow left-arrow">&#x2190;</div></td>
+                    <td><div class="arrow right-arrow">&#x2192;</div></td>
+                </tr></thead>
+            </table>
         </div>
         
         <!-- Image du vélo au centre -->

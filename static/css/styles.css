@@ -9,7 +9,10 @@ body {
 }
 
 /* Conteneur principal */
-
+.hello{
+    position: absolute;
+    top: 7%;
+}
 
 /* Section gauche */
 .left-section {
@@ -52,21 +55,29 @@ body {
     width: auto;
 }
 
-/* Section centrale (image du vélo) */
 .bike-image {
-    grid-column: 2; /* Place l'image au centre dans la deuxième colonne */
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Pleine hauteur de la page */
+    background-color: #f9f9f9; /* Fond de la page */
 }
 
 .bike-image img {
     height: 500px;
     width: auto;
     border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 25%;
-    left: 35%;
+    -webkit-mask-image: radial-gradient(cross, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 60%);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 80%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
 }
+
+
 
 /* Section droite */
 .right-section {
@@ -92,7 +103,48 @@ body {
     margin-top: 0;
     color: #000;
 }
+/* ==============Clignotant=============== */
+/* Style général pour le conteneur */
+.arrow-container {
+    position: absolute;
+    top: 6%;
+    right: 30%;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    margin: 50px auto;
+}
 
+/* Style des flèches */
+.arrow {
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: black; /* Couleur par défaut */
+    transition: transform 0.3s ease;
+}
+
+/* Animation de clignotement */
+.arrow:hover {
+    animation: blinkGreen 0.5s infinite;
+}
+
+/* Keyframes pour clignoter en vert */
+@keyframes blinkGreen {
+    0%, 50%, 100% {
+        color: black;
+    }
+    25%, 75% {
+        color: green;
+    }
+}
+
+/* Animation au survol */
+.arrow:hover {
+    transform: scale(1.2);
+}
+
+/* =============responsivité============= */
 /* Responsiveness pour petits écrans */
 @media (max-width: 768px) {
     .main-content-container {
