@@ -20,11 +20,15 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session:= cookies.GetCookie(w,r)
+	if session.UserID != 0{
+		http.Redirect(w,r,"/", http.StatusSeeOther)
+	}
 	data := home.Pageinfo{
 		Title:   "Enregistrement",
 		Page:    "register",
 		Session: session,
 	}
+	
 	fmt.Println("register/")
 	if r.Method == http.MethodGet {
 		tmpl.ExecuteTemplate(w, "base.html", data)
@@ -85,6 +89,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session := cookies.GetCookie(w, r)
+	if session.UserID != 0{
+		http.Redirect(w,r,"/", http.StatusSeeOther)
+	}
 	data := home.Pageinfo{
 		Title:   "Connexion",
 		Page:    "login",

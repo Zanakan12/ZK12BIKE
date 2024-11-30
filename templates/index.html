@@ -1,22 +1,40 @@
-<!-- templates/index.html -->
 {{ define "title" }}Page d'Accueil{{ end }}
 
 {{ define "content" }}
-<p>Bonjour, {{if .Session.Username}} {{.Session.Username}}!{{else}}Voyageur !{{end}}</p>
-<div class="left-item">
-    <h1>LOCATION </br>EBIKE</h2>
-    <p>Bienvenue sur notre page d'accueil.</br> Ici, vous trouverez des informations</br> sur nos services et notre entreprise.</p>
-    <p><a href="/register" class="register-link">Commencer Maintenant</a></p>
-</div>
-
-<div align="center">
-    <img  src="/static/images/bike1.png" alt="eBike image" class="bike1-img">
-</div>
-<div class="right-item" >
-    <div>
-        <p>Reservation rapide</p>
-        <p>Prix abordable</p>
-        <p>Différent modèle</p>
+<body>
+    <div class="main-content-container">
+        <!-- Section principale gauche -->
+        <div class="left-section">
+            <h1>LOCATION E-BIKES</h1>
+            <p>Conduisez dans la ville avec joie et confort, pour les véritables amoureux d'aventure.</p>
+            <a href="/register" class="cta-button">Commencer Maintenant</a>
+            <div class="app-download">
+                <p>Téléchargez l'application</p>
+                <a href="#"><img src="/static/images/playstore.png" alt="Play Store"></a>
+                <a href="#"><img src="/static/images/appstore.png" alt="App Store"></a>
+            </div>
+        </div>
+        
+        <!-- Image du vélo au centre -->
+        <div class="bike-image">
+            <img src="/static/images/bike1.png" alt="eBike image">
+        </div>
+        
+        <!-- Informations supplémentaires à droite -->
+        <div class="right-section">
+            <div class="info-box">
+                <h3>Réservation rapide</h3>
+                <p>Louez un vélo directement depuis l'application.</p>
+            </div>
+            <div class="info-box">
+                <h3>Prix abordable</h3>
+                <p>Balades à partir de 1,99 € par heure.</p>
+            </div>
+            <div class="info-box">
+                <h3>Différents modèles</h3>
+                <p>Des vélos pour les amateurs et les passionnés.</p>
+            </div>
+        </div>
     </div>
-</div>
+</body>
 {{ end }}
