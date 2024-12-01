@@ -70,7 +70,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("error to write into db")
 			return
 		}
-		fmt.Println("here")
+		
 		// Redirection après succès
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
@@ -155,10 +155,12 @@ func AdminPanelHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	allbike,_ := database.GetAllBikes()
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
 		Title: "Admin-Panel",
 		Page:  "Admin",
+		Bike: allbike,
 	}
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {

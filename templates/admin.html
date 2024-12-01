@@ -2,29 +2,37 @@
 
 
 {{define "content"}}
-<h1 class="hello">Bonjour, Admin</h1>
-<table class="table" border="1"><thead>
-    <tr>
-        <th>Image</th>
-        <th>Bike_type</th>
-        <th>Size</th>
-        <th>Motor_type</th>
-        <th>Battery</th>
-        <th>Speed</th>
-        <th>Autonomie</th>
-    </tr></thead>
+<h1 class="hello_admin">Bonjour, Admin</h1>
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Bike Type</th>
+            <th>Size</th>
+            <th>Motor Type</th>
+            <th>Battery</th>
+            <th>Speed</th>
+            <th>Autonomy</th>
+            <th>Status</th>
+            <th>Price</th>
+        </tr>
+    </thead>
     <tbody>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+        {{range .Bike}} <!-- Utilisez une boucle pour afficher les vélos -->
+        <tr>
+            <td><img src="{{.ImagePath}}" alt="Bike Image" width="100"></td>
+            <td>{{.BikeType}}</td>
+            <td>{{.Size}}</td>
+            <td>{{.MotorType}}</td>
+            <td>{{.Battery}} W</td>
+            <td>{{.Speed}} KM/H</td>
+            <td>{{.Autonomy}} KM</td>
+            <td>{{.Status}}</td>
+            <td>{{.Price}}</td>
+        </tr>
+        {{end}}
     </tbody>
-    </table>
+</table>
     <h2>Ajouter un nouveau vélo</h2>
 <form class="table2" action="/upload" method="post" enctype="multipart/form-data">
     <table  border="1">

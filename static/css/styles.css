@@ -469,14 +469,116 @@ body{
 
 
 /* ==================admin=============== */
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Titre principal */
+h1.hello_admin {
+    text-align: center;
+    color: #007bff;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+/* Table principale */
+.table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Formulaire d'ajout */
 .table2 {
-    position: absolute;
-    top: 30%;
-    width: 80%; /* Réduit la largeur à 80% de la taille parent */
-    margin: auto; /* Centre le tableau horizontalement */
-    font-size: 14px; /* Réduit la taille de la police */
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table2 table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .table2 th, .table2 td {
-    padding: 5px; /* Réduit l'espace intérieur des cellules */
+    padding: 10px;
+    text-align: center;
+}
+
+.table2 th {
+    background-color: #6c757d;
+    color: white;
+}
+
+.table2 select, .table2 input[type="textbox"] {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.table2 input[type="file"] {
+    border: none;
+    font-size: 0.9rem;
+}
+
+.table2 button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.table2 button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .table, .table2 {
+        width: 100%;
+    }
+
+    .table2 select, .table2 input[type="textbox"] {
+        width: 100%;
+    }
+
+    .table2 button {
+        width: 100%;
+    }
 }

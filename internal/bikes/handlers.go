@@ -16,9 +16,8 @@ import (
 
 // Compteur global pour les noms de fichiers
 const dirPath = "static/images/bike"
+
 var mu sync.Mutex
-
-
 
 func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse les fichiers de template
@@ -28,11 +27,12 @@ func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
 		return
 	}
-
+	allbike,_ := database.GetAllBikes()
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
 		Title: "Bike list",
 		Page:  "bike-list",
+		Bike:  allbike,
 	}
 	fmt.Println(data)
 	// Exécution du template
@@ -67,8 +67,8 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 	defer mu.Unlock()
 
 	// Utilise le compteur pour créer un nom de fichier basé sur un chiffre
-	counter,err := findMissingNumber(dirPath)
-	if err != nil{
+	counter, err := findMissingNumber(dirPath)
+	if err != nil {
 		fmt.Println("Erreur lors du chargement des noms de fichiers")
 	}
 	fileName := fmt.Sprintf("%d.jpg", counter)
@@ -95,15 +95,16 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == http.MethodPost {
 		bike_type := r.FormValue("bike_type")
-		size,_ :=strconv.Atoi(r.FormValue("size")) 
+		size, _ := strconv.Atoi(r.FormValue("size"))
 		motor_type := r.FormValue("motor_type")
-		speed,_ := strconv.Atoi(r.FormValue("speed"))
-		autonomy,_ := strconv.Atoi(r.FormValue("autonomy"))
-		price,_ := strconv.Atoi(r.FormValue("price"))
+		speed, _ := strconv.Atoi(r.FormValue("speed"))
+		autonomy, _ := strconv.Atoi(r.FormValue("autonomy"))
+		price, _ := strconv.Atoi(r.FormValue("price"))
 		status := r.FormValue("status")
-		battery,_ := strconv.Atoi(r.FormValue("battery"))
+		battery, _ := strconv.Atoi(r.FormValue("battery"))
 		// Ecrire dans la db
-		database.SaveBikeToDB(fileName, bike_type, motor_type, status , float64(size), speed, autonomy, battery, float64(price))
+		filePath := "/"+dirPath+"/"+fileName
+		database.SaveBikeToDB(filePath, bike_type, motor_type, status, float64(size), speed, autonomy, battery, float64(price))
 
 	}
 	http.Redirect(w, r, "/admin", http.StatusSeeOther)
