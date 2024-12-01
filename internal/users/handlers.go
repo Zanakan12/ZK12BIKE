@@ -13,22 +13,22 @@ import (
 )
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("../templates/base.html", "../templates/navbar.html", "../templates/register.html")
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/register.html")
 	if err != nil {
 		log.Println("Erreur lors du chargement du template:", err)
 		http.Error(w, "Erreur interne du serveur 1", http.StatusInternalServerError)
 		return
 	}
-	session:= cookies.GetCookie(w,r)
-	if session.UserID != 0{
-		http.Redirect(w,r,"/", http.StatusSeeOther)
+	session := cookies.GetCookie(w, r)
+	if session.UserID != 0 {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 	data := home.Pageinfo{
 		Title:   "Enregistrement",
 		Page:    "register",
 		Session: session,
 	}
-	
+
 	fmt.Println("register/")
 	if r.Method == http.MethodGet {
 		tmpl.ExecuteTemplate(w, "base.html", data)
@@ -37,7 +37,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 		password1 := r.FormValue("password1")
 		password2 := r.FormValue("password2")
-		
+
 		// Validations
 		if username == "" || email == "" {
 			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Nom d'utilisateur et email obligatoires"})
@@ -47,11 +47,11 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Les mots de passe ne correspondent pas"})
 			return
 		}
-		// if len(password1) < 6 {
-		// 	tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Le mot de passe doit contenir au moins 6 caractères"})
-		// 	return
-		// }
-		
+		if len(password1) < 6 {
+			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Le mot de passe doit contenir au moins 6 caractères"})
+			return
+		}
+
 		// Hachage du mot de passe
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password1), bcrypt.DefaultCost)
 		if err != nil {
@@ -63,9 +63,9 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		user := Users{
 			Name:     username,
 			Email:    email,
-			Role:	  "user",
+			Role:     "user",
 			Password: string(hashedPassword)}
-		if err := database.SaveUserToDB(user.Name, user.Email, user.Password,user.Role); err != nil {
+		if err := database.SaveUserToDB(user.Name, user.Email, user.Password, user.Role); err != nil {
 			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Erreur lors de l'enregistrement"})
 			fmt.Println("error to write into db")
 			return
@@ -81,9 +81,9 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	// Charger tous les fichiers nécessaires
 	tmpl, err := template.ParseFiles(
-		"../templates/base.html",
-		"../templates/navbar.html",
-		"../templates/login.html",
+		"templates/base.html",
+		"templates/navbar.html",
+		"templates/login.html",
 	)
 	if err != nil {
 		log.Println("Erreur lors du chargement du template:", err)
@@ -91,8 +91,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session := cookies.GetCookie(w, r)
-	if session.UserID != 0{
-		http.Redirect(w,r,"/", http.StatusSeeOther)
+	if session.UserID != 0 {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 	data := home.Pageinfo{
 		Title:   "Connexion",
@@ -147,23 +147,22 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func AdminPanelHandler(w http.ResponseWriter, r *http.Request) {
-    // Parse les fichiers de template
-    tmpl, err := template.ParseFiles("../templates/base.html", "../templates/navbar.html", "../templates/admin.html")
-    if err != nil {
-        fmt.Println("Erreur lors du parsing des templates:", err)
-        http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
-        return
-    }
+	// Parse les fichiers de template
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/admin.html")
+	if err != nil {
+		fmt.Println("Erreur lors du parsing des templates:", err)
+		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
+		return
+	}
 
-    // Création des données à envoyer au template
-    data := home.Pageinfo{
-        Title: "Admin-Panel",
-        Page:  "Admin",
-    }
-	fmt.Println(data)
-    // Exécution du template
-    if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
-        log.Println("Erreur lors de l'exécution du template:", err)
-        http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
-    }
+	// Création des données à envoyer au template
+	data := home.Pageinfo{
+		Title: "Admin-Panel",
+		Page:  "Admin",
+	}
+	// Exécution du template
+	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
+		log.Println("Erreur lors de l'exécution du template:", err)
+		http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
+	}
 }

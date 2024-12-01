@@ -7,17 +7,22 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"sync"
+	"zk12ebike/internal/database"
 	"zk12ebike/internal/home"
 )
 
 // Compteur global pour les noms de fichiers
-var counter int
+const dirPath = "static/images/bike"
 var mu sync.Mutex
+
+
 
 func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse les fichiers de template
-	tmpl, err := template.ParseFiles("../templates/base.html", "../templates/navbar.html", "../templates/bike_list.html")
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/bike_list.html")
 	if err != nil {
 		fmt.Println("Erreur lors du parsing des templates:", err)
 		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
@@ -36,7 +41,6 @@ func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
 	}
 }
-
 
 // Fonction pour gérer l'upload du fichier
 func UploadFile(w http.ResponseWriter, r *http.Request) {
@@ -63,17 +67,20 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 	defer mu.Unlock()
 
 	// Utilise le compteur pour créer un nom de fichier basé sur un chiffre
+	counter,err := findMissingNumber(dirPath)
+	if err != nil{
+		fmt.Println("Erreur lors du chargement des noms de fichiers")
+	}
 	fileName := fmt.Sprintf("%d.jpg", counter)
-	counter++
 
 	// Crée un dossier pour stocker les fichiers uploadés, s'il n'existe pas
-	if err := os.MkdirAll("uploads", os.ModePerm); err != nil {
+	if err := os.MkdirAll(dirPath, os.ModePerm); err != nil {
 		http.Error(w, "Erreur lors de la création du dossier de stockage", http.StatusInternalServerError)
 		return
 	}
 
 	// Crée le fichier final avec le nom basé sur le compteur
-	dst, err := os.Create(filepath.Join("uploads", fileName))
+	dst, err := os.Create(filepath.Join(dirPath, fileName))
 	if err != nil {
 		http.Error(w, "Erreur lors de la sauvegarde du fichier", http.StatusInternalServerError)
 		return
@@ -86,7 +93,52 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur lors de la sauvegarde du fichier", http.StatusInternalServerError)
 		return
 	}
+	if r.Method == http.MethodPost {
+		bike_type := r.FormValue("bike_type")
+		size,_ :=strconv.Atoi(r.FormValue("size")) 
+		motor_type := r.FormValue("motor_type")
+		speed,_ := strconv.Atoi(r.FormValue("speed"))
+		autonomy,_ := strconv.Atoi(r.FormValue("autonomy"))
+		price,_ := strconv.Atoi(r.FormValue("price"))
+		status := r.FormValue("status")
+		battery,_ := strconv.Atoi(r.FormValue("battery"))
+		// Ecrire dans la db
+		database.SaveBikeToDB(fileName, bike_type, motor_type, status , float64(size), speed, autonomy, battery, float64(price))
 
-	// Répond à l'utilisateur
-	fmt.Fprintf(w, "Fichier téléchargé avec succès sous le nom : %s", fileName)
+	}
+	http.Redirect(w, r, "/admin", http.StatusSeeOther)
+}
+
+func findMissingNumber(dirPath string) (int, error) {
+	// Map pour stocker les entiers trouvés
+	numbers := make(map[int]bool)
+
+	// Parcourir les fichiers du répertoire
+	err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Vérifier si ce n'est pas un répertoire
+		if !info.IsDir() {
+			// Extraire le nom du fichier sans extension
+			fileName := strings.TrimSuffix(info.Name(), filepath.Ext(info.Name()))
+			// Convertir en entier si possible
+			if number, err := strconv.Atoi(fileName); err == nil {
+				numbers[number] = true
+			}
+		}
+		return nil
+	})
+
+	if err != nil {
+		return 0, err
+	}
+
+	// Trouver le premier entier manquant
+	for i := 0; ; i++ {
+		if !numbers[i] {
+			return i, nil
+		}
+	}
 }

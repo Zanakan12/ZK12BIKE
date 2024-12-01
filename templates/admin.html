@@ -25,64 +25,77 @@
     </tr>
     </tbody>
     </table>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <table class="table2" border="1">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Bike_type</th>
-                    <th>Size</th>
-                    <th>Motor_type</th>
-                    <th>Battery</th>
-                    <th>Speed</th>
-                    <th>Autonomie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <label for="file-upload">Choisir un fichier :</label>
-                        <input type="file" id="file-upload" name="file" accept="image/*" required>
-                    </td>
-                    <td>
-                        <select name="bike_type" required>
-                            <option value="vtt">VTT</option>
-                            <option value="vtc">Vélo de ville</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="size" required>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="motor_type" required>
-                            <option value="pedalier">Pédalier</option>
-                            <option value="roue">Roue</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="battery" required>
-                            <option value="500">500 W</option>
-                            <option value="1000">1000 W</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="speed" required>
-                            <option value="25">25 KM/H</option>
-                            <option value="30">30 KM/H</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="autonomy" required>
-                            <option value="25">25 KM</option>
-                            <option value="30">30 KM</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit">Envoyer</button>
-    </form>    
+    <h2>Ajouter un nouveau vélo</h2>
+<form class="table2" action="/upload" method="post" enctype="multipart/form-data">
+    <table  border="1">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Bike Type</th>
+                <th>Size</th>
+                <th>Motor Type</th>
+                <th>Battery</th>
+                <th>Speed</th>
+                <th>Autonomy</th>
+                <th>Status</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="file-upload">Choisir un fichier :</label>
+                    <input type="file" id="file-upload" name="file" accept="image/*" required>
+                </td>
+                <td>
+                    <select name="bike_type" required>
+                        <option value="vtt">VTT</option>
+                        <option value="vtc">Vélo de ville</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="size" required>
+                        <option value="26">26"</option>
+                        <option value="27,5">27,5"</option>
+                        <option value="29">29"</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="motor_type" required>
+                        <option value="pedalier">Pédalier</option>
+                        <option value="roue">Roue</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="battery" required>
+                        <option value="500">500 W</option>
+                        <option value="1000">1000 W</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="speed" required>
+                        <option value="25">25 KM/H</option>
+                        <option value="30">30 KM/H</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="autonomy" required>
+                        <option value="25">25 KM</option>
+                        <option value="30">30 KM</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="status" required>
+                        <option value="disponible">Disponible</option>
+                        <option value="loue">Loué</option>
+                    </select>
+                </td>
+                <td>
+                    <input name="price" type="textbox" value="">  
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Envoyer</button>
+</form>
 {{end}}

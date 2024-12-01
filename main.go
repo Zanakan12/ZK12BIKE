@@ -15,7 +15,7 @@ func main() {
 
 	database.SetupDatabase()
 	//Serve the static directory
-	fs := http.FileServer(http.Dir("../static"))
+	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	//start the the server :

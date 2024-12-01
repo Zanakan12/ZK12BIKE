@@ -42,11 +42,13 @@ func createBikesTable(db *sql.DB) {
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		image_path TEXT NOT NULL,
 		bike_type TEXT NOT NULL,
-		size REAL,
 		motor_type TEXT NOT NULL,
-		speed INTEGER,
-		price REAL,
-		status TEXT NOT NULL DEFAULT 'DISPONIBLE',
+		size REAL,
+		speed INTEGER NOT NULL,
+		autonomy INTERGER NOT NULL,
+		price REAL NOT NULL,
+		battery INTEGER NOT NULL,
+		status TEXT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);`
 

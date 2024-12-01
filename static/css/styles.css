@@ -470,8 +470,10 @@ body{
 
 /* ==================admin=============== */
 .table2 {
+    position: absolute;
+    top: 30%;
     width: 80%; /* Réduit la largeur à 80% de la taille parent */
-    margin: auto; /* Centre le tableau */
+    margin: auto; /* Centre le tableau horizontalement */
     font-size: 14px; /* Réduit la taille de la police */
 }
 
