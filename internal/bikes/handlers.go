@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"zk12ebike/internal/cookies"
 	"zk12ebike/internal/database"
 	"zk12ebike/internal/home"
 )
@@ -27,14 +28,25 @@ func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
 		return
 	}
-	allbike,_ := database.GetAllBikes()
+	
+	session := cookies.GetCookie(w, r)
+	allbike, _ := database.GetAllBikes()
+	
+	username := "Biker"
+	if session.Username != "" {
+		username = session.Username
+	}
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
-		Title: "Bike list",
-		Page:  "bike-list",
-		Bike:  allbike,
+		Title:    "Bike list",
+		Page:     "bike-list",
+		Username: username,
+		Session:  session,
+		Bike:     allbike,
 	}
-	fmt.Println(data)
+	
+	
+
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
 		log.Println("Erreur lors de l'exécution du template:", err)
@@ -103,7 +115,7 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 		status := r.FormValue("status")
 		battery, _ := strconv.Atoi(r.FormValue("battery"))
 		// Ecrire dans la db
-		filePath := "/"+dirPath+"/"+fileName
+		filePath := "/" + dirPath + "/" + fileName
 		database.SaveBikeToDB(filePath, bike_type, motor_type, status, float64(size), speed, autonomy, battery, float64(price))
 
 	}

@@ -26,6 +26,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	data := home.Pageinfo{
 		Title:   "Enregistrement",
 		Page:    "register",
+		Username: "Biker",
 		Session: session,
 	}
 
@@ -58,12 +59,15 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Erreur lors du hachage du mot de passe", http.StatusInternalServerError)
 			return
 		}
-
+		role :="user"
+		// if username == "Zanakan"{
+		// 	role = "admin"
+		// }
 		// Créer et sauvegarder l'utilisateur
 		user := Users{
 			Name:     username,
 			Email:    email,
-			Role:     "user",
+			Role:     role,
 			Password: string(hashedPassword)}
 		if err := database.SaveUserToDB(user.Name, user.Email, user.Password, user.Role); err != nil {
 			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Erreur lors de l'enregistrement"})
@@ -97,6 +101,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	data := home.Pageinfo{
 		Title:   "Connexion",
 		Page:    "login",
+		Username: "Biker",
 		Session: session,
 	}
 	if r.Method == http.MethodGet {
@@ -110,10 +115,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 		userID := database.GetUserId(username)
-
+		role := database.GetUserRole(username)
 		// Vous pouvez ici valider le nom d'utilisateur et le mot de passe
 		if database.CheckUser(username, password) {
-			cookies.CreateSession(w, userID, username, "user")
+			cookies.CreateSession(w, userID, username, role)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			http.Error(w, "Nom d'utilisateur ou mot de passe incorrect", http.StatusUnauthorized)

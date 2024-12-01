@@ -1,25 +1,26 @@
 {{ define "title" }}Bike list{{ end }}
 
-{{define "content"}}
-    <div class="card">
-        <div class="front">
-            <img src ="https://avatars.githubusercontent.com/u/175028485?v=4" alt="">
-            <h1>RAfta</h>
-        </div>
-        <div class="back">
-            <h1>Caractéristiques</h1>
-            <ul>
-                <li><strong>Type :</strong> VTT électrique</li>
-                <li><strong>Taille :</strong> 27,5 pouces</li>
-                <li><strong>Type moteur :</strong>Pedalier</li>
-                <li><strong>Batterie :</strong> 500 Wh</li>
-                <li><strong>Vitesse :</strong> 25 km/h</li>
-            </ul>
-        </div>
+{{ define "content" }}
+    <div class="card-container">
+        {{ range .Bike }}
+            <div class="card">
+                <div class="front">
+                    <img src="{{.ImagePath}}" alt="Image of {{.BikeType}}">
+                    <h1>{{.BikeType}}</h1>
+                </div>
+                <div class="back">
+                    <h1>Caractéristiques</h1>
+                    <ul>
+                        <li><strong>Type :</strong> {{.BikeType}} </li>
+                        <li><strong>Taille :</strong> {{.Size}}</li>
+                        <li><strong>Type moteur :</strong> {{.MotorType}}</li>
+                        <li><strong>Batterie :</strong> {{.Battery}}</li>
+                        <li><strong>Vitesse :</strong> {{.Speed}}</li>
+                        <li><strong>Autonomie :</strong> {{.Autonomy}}</li>
+                        <li><strong>Prix :</strong> {{.Price}} €/h</li>
+                    </ul>
+                </div>
+            </div>
+        {{ end }}
     </div>
-    
-    
-{{end}}
-
-
-    
+{{ end }}

@@ -14,18 +14,19 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur interne du serveur 1", http.StatusInternalServerError)
 		return
 	}
-	session := cookies.GetCookie(w,r)
-	username := "Bikers"
-	if session.Username !=""{
+	session := cookies.GetCookie(w, r)
+	username := "Biker"
+	if session.Username != "" {
 		username = session.Username
 	}
+
 	// Les données à passer au template
 	data := Pageinfo{
-		Title: "Page d'accueil",
-		Page: "home",
+		Title:    "Page d'accueil",
+		Page:     "home",
 		Username: username,
+		Session:  session,
 	}
-
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
 		log.Println("Erreur lors de l'exécution du template:", err)

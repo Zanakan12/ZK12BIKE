@@ -8,12 +8,14 @@
         <div class="left-section">
             <h1>LOCATION E-BIKES</h1>
             <p>Conduisez dans la ville avec joie et confort, pour les véritables amoureux d'aventure.</p>
+            {{if eq .Username "Biker"}}
             <a href="/register" class="cta-button">Commencer Maintenant</a>
             <div class="app-download">
                 <p>Téléchargez l'application</p>
                 <a href="#"><img src="/static/images/playstore.png" alt="Play Store"></a>
                 <a href="#"><img src="/static/images/appstore.png" alt="App Store"></a>
             </div>
+            {{end}}
         </div>
         <!-- clignotant au dessus de la photo-->
         <div class="arrow-container">

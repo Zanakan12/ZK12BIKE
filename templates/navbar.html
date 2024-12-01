@@ -24,13 +24,17 @@
               <li><a href="/Acheter">Acheter</a></li>
               <li><a href="/tarifs">Tarifs</a></li>
               <li><a href="/services">Services</a></li>
-              <li><a href="/admin">Admin-Panel</a></li>
+              {{if eq .Session.Role "admin"}}
+                  <li><a href="/admin">Admin-Panel</a></li>
+              {{end}}
               <div class="auth">
-                {{if .Username}}
-                <li style="order: 1;"><a href="/mon-compte">Mon Compte</a></li>
-                <li style="order: 2;"><a href="/logout">DÉCONNEXION</a></li>
+                {{if ne .Username "Biker"}}
+                  <li style="order: 1;"><a href="/mon-compte">Mon Compte</a></li>
+                  <li style="order: 2;"><a href="/logout">DÉCONNEXION</a></li>
                 {{else}}
-                    <li><a href="/login">CONNEXION</a></li>
+                    {{if ne .Page "login"}}
+                      <li><a href="/login">CONNEXION</a></li>
+                    {{end}}
                 {{end}}
               </div>
               <!-- Panier avec une icône de caddie -->

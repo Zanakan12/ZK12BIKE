@@ -119,3 +119,27 @@ func GetAllBikes() ([]Bike, error) {
 	}
 	return bikes, nil
 }
+
+func GetUserRole(username string) string {
+	db := SetupDatabase()
+	defer db.Close()
+
+	query := "SELECT role FROM users WHERE username = ?"
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		log.Println("Erreur lors de la préparation de la requête:", err)
+		return ""
+	}
+	defer stmt.Close()
+	var role string
+	err = stmt.QueryRow(username).Scan(&role)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return ""
+		} else {
+			log.Println("Erreur lors de l'exécution de la requête:", err)
+			return ""
+		}
+	}
+	return role
+}
