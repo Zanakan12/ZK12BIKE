@@ -1,3 +1,5 @@
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=Ruthie&display=swap');
 /* =========================== Body =========================== */
 /* Styles globaux */
 body {
@@ -397,9 +399,16 @@ body {
     margin-right: 5px; /* Espacement entre l'icône et le texte */
 }
 
-.auth{
-    margin-left: 150px;
-}
+.auth {
+    display: flex;
+    gap: 10px; /* Espacement entre les éléments */
+    margin-left: 250px;
+  }
+  
+  .auth li {
+    order: 0; /* Par défaut, les éléments suivent l'ordre HTML */
+  }
+  
 
 /* ========================== Footer ========================== */
 footer {
@@ -410,4 +419,62 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+body{
+    background:#f9f9f9;
+}
+.card{
+    position: absolute;
+    top: 10%;
+    width: 250px;
+    height: 400px;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.front,.back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid gold;
+    color: gold;
+    background-color: black;
+    border-radius: 10px;
+    backface-visibility: hidden;
+}
+
+.card:hover{
+    transform: rotateY(180deg);
+}
+
+.front{
+    text-align: center;
+}
+
+.front img{
+        width: 60%;
+        border-radius: 50%;
+}
+
+.front h1{
+        font-family: "Ruthie", cursive;
+        font-weight: normal;
+        font-style: normal;
+        text-shadow: 2rem;
+}
+.back{
+    transform: rotateY(180deg);
+}
+
+
+/* ==================admin=============== */
+.table2 {
+    width: 80%; /* Réduit la largeur à 80% de la taille parent */
+    margin: auto; /* Centre le tableau */
+    font-size: 14px; /* Réduit la taille de la police */
+}
+
+.table2 th, .table2 td {
+    padding: 5px; /* Réduit l'espace intérieur des cellules */
 }

@@ -1,0 +1,88 @@
+{{define "title"}}{{.Title}}{{end}}
+
+
+{{define "content"}}
+<h1 class="hello">Bonjour, Admin</h1>
+<table class="table" border="1"><thead>
+    <tr>
+        <th>Image</th>
+        <th>Bike_type</th>
+        <th>Size</th>
+        <th>Motor_type</th>
+        <th>Battery</th>
+        <th>Speed</th>
+        <th>Autonomie</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <table class="table2" border="1">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Bike_type</th>
+                    <th>Size</th>
+                    <th>Motor_type</th>
+                    <th>Battery</th>
+                    <th>Speed</th>
+                    <th>Autonomie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="file-upload">Choisir un fichier :</label>
+                        <input type="file" id="file-upload" name="file" accept="image/*" required>
+                    </td>
+                    <td>
+                        <select name="bike_type" required>
+                            <option value="vtt">VTT</option>
+                            <option value="vtc">Vélo de ville</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="size" required>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="motor_type" required>
+                            <option value="pedalier">Pédalier</option>
+                            <option value="roue">Roue</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="battery" required>
+                            <option value="500">500 W</option>
+                            <option value="1000">1000 W</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="speed" required>
+                            <option value="25">25 KM/H</option>
+                            <option value="30">30 KM/H</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="autonomy" required>
+                            <option value="25">25 KM</option>
+                            <option value="30">30 KM</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Envoyer</button>
+    </form>    
+{{end}}

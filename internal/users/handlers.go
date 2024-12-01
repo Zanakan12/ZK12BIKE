@@ -37,21 +37,21 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 		password1 := r.FormValue("password1")
 		password2 := r.FormValue("password2")
-
+		
 		// Validations
 		if username == "" || email == "" {
-			tmpl.ExecuteTemplate(w, "register", map[string]string{"Error": "Nom d'utilisateur et email obligatoires"})
+			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Nom d'utilisateur et email obligatoires"})
 			return
 		}
 		if password1 != password2 {
-			tmpl.ExecuteTemplate(w, "register", map[string]string{"Error": "Les mots de passe ne correspondent pas"})
+			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Les mots de passe ne correspondent pas"})
 			return
 		}
-		if len(password1) < 6 {
-			tmpl.ExecuteTemplate(w, "register", map[string]string{"Error": "Le mot de passe doit contenir au moins 6 caractères"})
-			return
-		}
-
+		// if len(password1) < 6 {
+		// 	tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Le mot de passe doit contenir au moins 6 caractères"})
+		// 	return
+		// }
+		
 		// Hachage du mot de passe
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password1), bcrypt.DefaultCost)
 		if err != nil {
@@ -63,12 +63,14 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		user := Users{
 			Name:     username,
 			Email:    email,
+			Role:	  "user",
 			Password: string(hashedPassword)}
-		if err := database.SaveUserToDB(user.Name, user.Email, user.Password); err != nil {
-			tmpl.ExecuteTemplate(w, "register", map[string]string{"Error": "Erreur lors de l'enregistrement"})
+		if err := database.SaveUserToDB(user.Name, user.Email, user.Password,user.Role); err != nil {
+			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Erreur lors de l'enregistrement"})
+			fmt.Println("error to write into db")
 			return
 		}
-
+		fmt.Println("here")
 		// Redirection après succès
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
@@ -142,4 +144,26 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Rediriger vers la page de connexion
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func AdminPanelHandler(w http.ResponseWriter, r *http.Request) {
+    // Parse les fichiers de template
+    tmpl, err := template.ParseFiles("../templates/base.html", "../templates/navbar.html", "../templates/admin.html")
+    if err != nil {
+        fmt.Println("Erreur lors du parsing des templates:", err)
+        http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
+        return
+    }
+
+    // Création des données à envoyer au template
+    data := home.Pageinfo{
+        Title: "Admin-Panel",
+        Page:  "Admin",
+    }
+	fmt.Println(data)
+    // Exécution du template
+    if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
+        log.Println("Erreur lors de l'exécution du template:", err)
+        http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
+    }
 }

@@ -1,38 +1,53 @@
 <nav class="navbar">
-    <!-- Conteneur principal de la barre de navigation -->
-    <div class="navbar-container">
-        <!-- Logo du site avec un lien vers la page d'accueil -->
-        <a href="/" class="navbar-logo">
-            <img src="/static/images/logo.png" alt="eBike Logo" class="logo-img">
-        </a>
+  <table>
+    <thead>
+      <tr>
+        <td>
+          <!-- Conteneur principal de la barre de navigation -->
+          <div class="navbar-container">
+            <!-- Logo du site avec un lien vers la page d'accueil -->
+            <a href="/" class="navbar-logo">
+              <img
+                src="/static/images/logo.png"
+                alt="eBike Logo"
+                class="logo-img"
+              />
+            </a>
 
-        <!-- Bouton du menu hamburger -->
-        <button class="hamburger-menu" id="hamburger-menu">
-            ☰
-        </button>
+            <!-- Bouton du menu hamburger -->
+            <button class="hamburger-menu" id="hamburger-menu">☰</button>
 
-        <!-- Menu de navigation principal -->
-        <ul class="navbar-menu" id="navbar-menu">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="/velos-a-louer">Vélos à Louer</a></li>
-            <li><a href="/velos-a-vendre">Vélos à Vendre</a></li>
-            <li><a href="/tarifs">Tarifs</a></li>
-            <li><a href="/services">Services</a></li>
-            <div class="auth">
-                {{if .Session.Username}}
-                    <li><a href="/mon-compte">Mon Compte</a></li>
-                    <li><a href="/logout">DÉCONNEXION</a></li>
+            <!-- Menu de navigation principal -->
+            <ul class="navbar-menu" id="navbar-menu">
+              <li><a href="/">Accueil</a></li>
+              <li><a href="/bike-list">Louer</a></li>
+              <li><a href="/Acheter">Acheter</a></li>
+              <li><a href="/tarifs">Tarifs</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/admin">Admin-Panel</a></li>
+              <div class="auth">
+                {{if .Username}}
+                <li style="order: 1;"><a href="/mon-compte">Mon Compte</a></li>
+                <li style="order: 2;"><a href="/logout">DÉCONNEXION</a></li>
                 {{else}}
                     <li><a href="/login">CONNEXION</a></li>
                 {{end}}
-            </div>
-            <!-- Panier avec une icône de caddie -->
-            <li>
+              </div>
+              <!-- Panier avec une icône de caddie -->
+              <li>
                 <a href="/panier">
-                    <img src="/static/images/caddie.png" alt="Logo Panier" class="panier-icon">
-                    Panier
+                  <img
+                    src="/static/images/caddie.png"
+                    alt="Logo Panier"
+                    class="panier-icon"
+                  />
+                  Panier
                 </a>
-            </li>
-        </ul>
-    </div>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </thead>
+  </table>
 </nav>

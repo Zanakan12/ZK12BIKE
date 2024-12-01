@@ -9,7 +9,9 @@ func createUsersTable(db *sql.DB) {
 		username TEXT NOT NULL,
 		email TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL,
+		role TEXT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 	);`
 
 	executeSQL(db, createTableSQL)
@@ -38,8 +40,11 @@ func createOrdersTable(db *sql.DB) {
 func createBikesTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS bikes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		username TEXT NOT NULL,
+		image_path TEXT NOT NULL,
 		bike_type TEXT NOT NULL,
+		size REAL,
+		motor_type TEXT NOT NULL,
+		speed INTEGER,
 		price REAL,
 		status TEXT NOT NULL DEFAULT 'DISPONIBLE',
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

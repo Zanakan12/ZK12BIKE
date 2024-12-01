@@ -5,5 +5,6 @@ type Users struct{
 	Name     	string
     Email    	string
     Password 	string
+	Role 		string
 	Created_at 	string
 }
