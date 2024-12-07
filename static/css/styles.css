@@ -281,8 +281,6 @@ a:hover {
     text-decoration: underline;
 }
 
-
-/* ========================== Navbar =========================== */
 /* ========================== Navbar =========================== */
 
 .navbar {
@@ -424,6 +422,56 @@ a:hover {
 .cart-button:hover + .cart-dropdown {
     display: block;  /* Affiche le menu lorsque le bouton est survolé */
 }
+/* ========================== Styles pour la liste des articles du panier =========================== */
+.cart-items {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0;
+  }
+  
+  .cart-item {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0.5rem 0; 
+    border-bottom: 1px solid #eee; 
+    font-size: 0.9rem; 
+  }
+  
+  .cart-item span {
+    display: inline-block;
+  }
+  
+  .bike-type {
+    flex: 2; 
+    color: var(--dark);
+  }
+  
+  .bike-price {
+    flex: 1; 
+    color: var(--primary); 
+    text-align: center; 
+    font-weight: bold;
+  }
+  
+  .bike-quantity {
+    flex: 1; 
+    text-align: right; 
+    color: var(--secondary);
+  }
+  
+  .cart-total {
+    display: flex; 
+    justify-content: space-between; 
+    padding: 1rem 0; 
+    font-weight: bold; 
+    border-top: 2px solid #ddd; 
+  }
+  
+  .cart-total strong {
+    color: var(--primary);
+  }
+  
 
 /* ========================== Footer ========================== */
 footer {

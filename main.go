@@ -9,9 +9,18 @@ import (
 	"zk12ebike/internal/database"
 	"zk12ebike/internal/home"
 	"zk12ebike/internal/users"
+
+	"github.com/gin-gonic/gin"
 )
 
 const port = ":8080"
+
+var (
+	app *gin.Engine
+)
+func ini(){
+	app = gin.New()
+}
 
 func main() {
 
@@ -28,7 +37,7 @@ func main() {
 	http.HandleFunc("/profile", users.ProfileHandler)
 	http.HandleFunc("/bike-list", bikes.BikeListHandler)
 	http.HandleFunc("/admin", users.AdminPanelHandler)
-	http.HandleFunc("/addtoshop",bikes.AddToCartHandler)
+	http.HandleFunc("/addtoshop", bikes.AddToCartHandler)
 	http.HandleFunc("/bike-detail/", func(w http.ResponseWriter, r *http.Request) {
 		// Récupère l'ID sur l'Url
 		id, _ := strconv.Atoi(strings.TrimPrefix(r.URL.Path, "/bike-detail/"))

@@ -40,7 +40,7 @@ type Session struct {
 	Role      string
 	CreatedAt time.Time
 	Cart 	  int
-	Bike 	  []database.Bike
+	BikeShop 	  []database.BikeShop
 	// We need to add the user role here...
 }
 
@@ -65,7 +65,8 @@ func GetSession(sessionID string) (Session, bool) {
 	mutex.RLock()
 	defer mutex.RUnlock()
 	session, exists := sessions[sessionID]
-	_,session.Cart,_ = database.GetShopBike(session.UserID)
+	session.BikeShop,session.Cart,_ = database.GetShopBike(session.UserID)
+	
 	return session, exists
 }
 

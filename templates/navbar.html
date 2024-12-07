@@ -25,10 +25,16 @@
         <div class="cart-dropdown">
           <!-- Contenu du panier ici -->
           <ul class="cart-items">
-            {{range .BikeShop}}
-              <li></li>
+            {{range .Session.BikeShop}}
+              <li class="cart-item">
+                <span class="bike-type">{{.BikeType}}</span>
+                <span class="bike-price">{{.Price}}€</span>
+                <span class="bike-quantity">x{{.Total}}</span>
+              </li>
             {{end}}
-            <li>Total: 2 articles</li>
+            <li class="cart-total">
+              <strong>Total :</strong> {{.Session.Cart}} articles
+            </li>
           </ul>
           <a href="/checkout" class="checkout-btn">Passer à la caisse</a>
         </div>
