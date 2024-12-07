@@ -1,5 +1,6 @@
 package bikes
 
+/*
 type Bike struct {
 	ID         int     // Identifiant unique
 	ImagePath  string  // Chemin de l'image
@@ -11,3 +12,4 @@ type Bike struct {
 	Autonomy   int     // Autonomie (en km)
 	Price      float64 // Prix
 }
+*/

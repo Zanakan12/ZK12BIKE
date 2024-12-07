@@ -24,10 +24,10 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 	data := home.Pageinfo{
-		Title:   "Enregistrement",
-		Page:    "register",
+		Title:    "Enregistrement",
+		Page:     "register",
 		Username: "Biker",
-		Session: session,
+		Session:  session,
 	}
 
 	fmt.Println("register/")
@@ -59,7 +59,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Erreur lors du hachage du mot de passe", http.StatusInternalServerError)
 			return
 		}
-		role :="user"
+		role := "user"
 		// if username == "Zanakan"{
 		// 	role = "admin"
 		// }
@@ -74,7 +74,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("error to write into db")
 			return
 		}
-		
+
 		// Redirection après succès
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
@@ -99,10 +99,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 	data := home.Pageinfo{
-		Title:   "Connexion",
-		Page:    "login",
+		Title:    "Connexion",
+		Page:     "login",
 		Username: "Biker",
-		Session: session,
+		Session:  session,
 	}
 	if r.Method == http.MethodGet {
 		// Utiliser "base.html" comme template principal, en prenant les définitions de login.html
@@ -160,12 +160,59 @@ func AdminPanelHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	allbike,_ := database.GetAllBikes()
+	session := cookies.GetCookie(w, r)
+	if session.UserID == 0 {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
+	allbike, _ := database.GetAllBikes()
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
 		Title: "Admin-Panel",
 		Page:  "Admin",
-		Bike: allbike,
+		Bike:  allbike,
+		Session: session,
+	}
+	// Exécution du template
+	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
+		log.Println("Erreur lors de l'exécution du template:", err)
+		http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
+	}
+}
+
+func ProfileHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/profile.html")
+	if err != nil {
+		fmt.Println("Erreur lors du parsing des templates:", err)
+		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
+		return
+	}
+
+	session := cookies.GetCookie(w, r)
+	if session.UserID == 0 {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	bikeList,_,_ := database.GetShopBike(session.UserID)
+
+	// On parcourt chaque vélo dans le panier
+	var shopBike []database.Bike
+	for i := range bikeList {
+		// Récupère l'ID du vélo à partir de l'objet bikeList[i]
+		bikeID := bikeList[i].ID
+
+		// Récupère les détails de ce vélo en utilisant son ID
+		shopBike, _ = database.GetOneBike(bikeID)
+
+	}
+	//
+	// Création des données à envoyer au template
+	data := home.Pageinfo{
+		Title:   "Profile",
+		Page:    "Profile",
+		Session: session,
+		Bike:    shopBike,
+		BikeShop: bikeList,
+		
 	}
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {

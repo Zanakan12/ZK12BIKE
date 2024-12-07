@@ -16,6 +16,7 @@ func SetupDatabase() *sql.DB {
 	createUsersTable(db)
 	createBikesTable(db)
 	createOrdersTable(db)
+	createShopTable(db)
 	return db
 }
 

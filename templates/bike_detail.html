@@ -1,1 +1,44 @@
 <!-- Placeholder for HTML template -->
+{{define "title"}}Detail{{end}}
+
+{{define "content"}}
+{{range .Bike}}
+<div class="product-page">
+    <!-- Section des images -->
+    <div class="product-images">
+      <img src="/static/images/bike1.png" alt="Vue latérale du vélo">
+      <img src="/static/images/bike1.png" alt="Vue avant du vélo">
+      <img src="/static/images/bike1.png" alt="Vue arrière du vélo">
+      <img src="/static/images/bike1.png" alt="Vue de dessus du vélo">
+    </div>
+
+    <!-- Section des détails -->
+    <div class="product-details">
+      
+      <h1>Vélo {{.BikeType}} électrique</br>moteur {{.MotorType}}
+        {{.Size}}"</h1>
+      <p class="price">
+        <span class="current-price">{{.Price}}€</span>
+        <span class="discounted-price">25€</span>
+      </p>
+      <p class="availability">Disponible jusqu'au 26/12/2024</p>
+      <p class="description">
+        Conçu pour les pilotes qui roulent vite en montée comme en descente ! Son caractère fun et maniable amplifie le plaisir dans tous les trails naturels !
+      </p>
+      <div class="color-size">
+        <p><strong>Status :</strong> {{.Status}}</p>
+        <p><strong>Taille :</strong>{{.Size}}</p>
+      </div>
+      <form action="/addtoshop" method="POST">
+        <input type="hidden" name="user_id" value="{{$.Session.UserID}}">
+        <input type="hidden" name="bike_id" value="{{.ID}}">
+        <input type="hidden" name="bike_type" value="{{.BikeType}}">
+        <input type="hidden" name="price" value="{{.Price}}">
+        <input type="hidden" name="size" value="{{.Size}}">
+        <input type="hidden" name="total" value="0">
+        <button type="submit" class="add-to-cart">Ajouter au Panier</button>
+      </form>
+    </div>
+  </div>
+{{end}}
+{{end}}

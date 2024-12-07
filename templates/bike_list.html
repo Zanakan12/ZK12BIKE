@@ -1,12 +1,14 @@
 {{ define "title" }}Bike list{{ end }}
 
 {{ define "content" }}
+
     <div class="card-container">
         {{ range .Bike }}
+        <a href="/bike-detail/{{.ID}}">
             <div class="card">
                 <div class="front">
                     <img src="{{.ImagePath}}" alt="Image of {{.BikeType}}">
-                    <h1>{{.BikeType}}</h1>
+                    <h1>{{.Status}}</h1>
                 </div>
                 <div class="back">
                     <h1>Caractéristiques</h1>
@@ -17,10 +19,12 @@
                         <li><strong>Batterie :</strong> {{.Battery}}</li>
                         <li><strong>Vitesse :</strong> {{.Speed}}</li>
                         <li><strong>Autonomie :</strong> {{.Autonomy}}</li>
-                        <li><strong>Prix :</strong> {{.Price}} €/h</li>
+                        <li><strong>Prix :</strong> {{.Price}}€/jour</li>
                     </ul>
                 </div>
             </div>
-        {{ end }}
+        </a>
+    {{ end }}
     </div>
+    
 {{ end }}

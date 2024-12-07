@@ -1,0 +1,32 @@
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "content"}}
+<body>
+    <header class="header">
+        <h1>Location de Vélo</h1>
+    </header>
+    <div class="profile-container">
+        <div class="profile-card">
+            <img src="/static/images/pngegg.png" alt="Photo de Profil" class="profile-photo">
+            <h1 class="profile-name">{{.Session.Username}}</h1>
+            <p class="profile-bio">Passionné de cyclisme et propriétaire d'une entreprise de location de vélos écologiques.</p>
+            <ul class="profile-details">
+                {{ if .Bike}}
+                    {{range .Bike }}
+                        <li> Location en cours :</br> type : {{.BikeType}},</br> Taille : {{.Size}},</br> Prix : {{.Price}}€,</br> Date : {{range $.BikeShop}}{{.CreatedAt}}{{end}}</li>
+                    {{end}}
+                    <li> Location en cours : Pas de location en cours</li>
+                {{else}}
+                {{end}}
+                
+                <li>📍 Localisation : Paris, France</li>
+                <li>🚴‍♂️ Nombre de vélos disponibles : 25</li>
+                <li>📅 Inscrit depuis : {{.Session.CreatedAt}}</li>
+            </ul>
+            <form action="/logout">
+                <button href="/logout" class="action-button">Déconnexion</button>
+            </form>
+        </div>
+    </div>
+</body>
+{{end}}

@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 	"zk12ebike/internal/bikes"
 	"zk12ebike/internal/database"
 	"zk12ebike/internal/home"
@@ -23,8 +25,19 @@ func main() {
 	http.HandleFunc("/register", users.RegisterHandler)
 	http.HandleFunc("/login", users.LoginHandler)
 	http.HandleFunc("/logout", users.LogoutHandler)
-	http.HandleFunc("/bike-list",bikes.BikeListHandler)
-	http.HandleFunc("/admin",users.AdminPanelHandler)
+	http.HandleFunc("/profile", users.ProfileHandler)
+	http.HandleFunc("/bike-list", bikes.BikeListHandler)
+	http.HandleFunc("/admin", users.AdminPanelHandler)
+	http.HandleFunc("/addtoshop",bikes.AddToCartHandler)
+	http.HandleFunc("/bike-detail/", func(w http.ResponseWriter, r *http.Request) {
+		// Récupère l'ID sur l'Url
+		id, _ := strconv.Atoi(strings.TrimPrefix(r.URL.Path, "/bike-detail/"))
+		bikes.BikeDetailHandler(w, r, id)
+		return
+
+	})
+	// Action
+	http.HandleFunc("/delete", bikes.DeleteBikeHandler)
 	http.HandleFunc("/upload", bikes.UploadFile)
 	// route to handlers make the route before the running server
 	fmt.Println("The server is start on http://localhost" + port)

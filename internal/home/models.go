@@ -5,12 +5,13 @@ import (
 	"zk12ebike/internal/database"
 )
 
-
 type Pageinfo struct {
-	Title string
-	Page string
-	Logo string
+	Title    string
+	Page     string
+	Logo     string
 	Username string
-	Session cookies.Session
-	Bike    []database.Bike
+	Cart	 int
+	Session  cookies.Session
+	Bike     []database.Bike
+	BikeShop []database.BikeShop
 }

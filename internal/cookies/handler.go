@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"sync"
 	"time"
+	"zk12ebike/internal/database"
 
 	"github.com/google/uuid"
 )
@@ -38,6 +39,8 @@ type Session struct {
 	Username  string
 	Role      string
 	CreatedAt time.Time
+	Cart 	  int
+	Bike 	  []database.Bike
 	// We need to add the user role here...
 }
 
@@ -49,6 +52,7 @@ var (
 func StoreSession(sessionID string, userID int, username, role string) {
 	mutex.Lock()
 	defer mutex.Unlock()
+	
 	sessions[sessionID] = Session{
 		UserID:    userID,
 		Username:  username,
@@ -61,6 +65,7 @@ func GetSession(sessionID string) (Session, bool) {
 	mutex.RLock()
 	defer mutex.RUnlock()
 	session, exists := sessions[sessionID]
+	_,session.Cart,_ = database.GetShopBike(session.UserID)
 	return session, exists
 }
 

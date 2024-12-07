@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }}</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="/static/js/scripts.js"></script>
 </head>
 <body>
     {{ template "navbar.html" . }}
@@ -13,8 +15,5 @@
     <main style="padding-top: 60px;">
         {{ block "content" . }}{{ end }}
     </main>
-    <footer>
-        <p>&copy; 2024 Mon Site Web. Tous droits réservés.</p>
-    </footer>
 </body>
 </html>

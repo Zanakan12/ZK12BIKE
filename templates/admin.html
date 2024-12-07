@@ -6,6 +6,7 @@
 <table class="table" border="1">
     <thead>
         <tr>
+            <th>ID</td>
             <th>Image</th>
             <th>Bike Type</th>
             <th>Size</th>
@@ -15,11 +16,16 @@
             <th>Autonomy</th>
             <th>Status</th>
             <th>Price</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        {{range .Bike}} <!-- Utilisez une boucle pour afficher les vélos -->
+        {{range .Bike}}
+        <form action="/delete" method="post">
         <tr>
+            <input type="hidden" name="fildPath" name="fildPath" value="{{.ImagePath}}">
+            <input type="hidden" name="bike_id" value="{{.ID}}">
+            <td>{{.ID}}</td>
             <td><img src="{{.ImagePath}}" alt="Bike Image" width="100"></td>
             <td>{{.BikeType}}</td>
             <td>{{.Size}}</td>
@@ -28,8 +34,10 @@
             <td>{{.Speed}} KM/H</td>
             <td>{{.Autonomy}} KM</td>
             <td>{{.Status}}</td>
-            <td>{{.Price}}</td>
+            <td>{{.Price}}€</td>
+            <td> <button type="submit" name="delete" value="delete">✘</button>
         </tr>
+    </form>
         {{end}}
     </tbody>
 </table>
@@ -99,7 +107,7 @@
                     </select>
                 </td>
                 <td>
-                    <input name="price" type="textbox" value="">  
+                    <input name="price" type="textbox" value="" required>€  
                 </td>
             </tr>
         </tbody>

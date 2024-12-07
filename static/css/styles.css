@@ -203,7 +203,7 @@ input[type="text"], input[type="password"] {
 
 button[type="submit"] {
     width: 100%;
-    background-color: #1eb616; /* Couleur bleue de Facebook */
+    background-color: #1f811f; /* Couleur bleue de Facebook */
     color: white;
     padding: 12px;
     border: none;
@@ -253,7 +253,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 .btn {
     width: 100%;
-    background-color: #1877f2; /* Couleur bleue de Facebook */
+    background-color:#2a7104; /* Couleur bleue de Facebook */
     color: white;
     padding: 12px;
     border: none;
@@ -263,7 +263,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 
 .btn:hover {
-    background-color: #155ab6; /* Couleur bleue légèrement plus foncée au survol */
+    background-color:#1f811f; /* Couleur bleue légèrement plus foncée au survol */
 }
 
 p {
@@ -283,132 +283,147 @@ a:hover {
 
 
 /* ========================== Navbar =========================== */
-/* Styles globaux */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ========================== Navbar =========================== */
+
+.navbar {
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
-/* Styles de la barre de navigation */
-.navbar {
+.navbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 0px;
-    background-color: #3b3b3b; /* Couleur de fond sombre */
-    color: white;
-    position: fixed; /* Navigation toujours visible en haut de la page */
-    width: 100%;
-    top: 0;
-    z-index: 1000; /* Toujours au-dessus des autres éléments */
 }
 
-/* Conteneur principal pour aligner logo et menu */
-.navbar-container {
+.logo {
     display: flex;
     align-items: center;
-    width: 100%;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
 }
 
-/* Logo du site */
-.navbar-logo {
+.nav-links {
     display: flex;
+    gap: 2rem;
     align-items: center;
-    margin-right: 150px; /* Espacement réduit entre le logo et le menu */
 }
 
-.logo-img {
-    height: 50px; /* Ajustez la hauteur selon vos besoins */
-    width: auto;
-}
-
-/* Menu de navigation */
-.navbar-menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1; /* Prend l'espace disponible */
-    justify-content: center; /* Centre les éléments de menu */
-}
-
-.navbar-menu li {
-    margin: 0 10px; /* Espacement réduit entre les éléments du menu */
-}
-
-.navbar-menu a {
-    color: white;
+.nav-links a {
     text-decoration: none;
-    font-weight:lighter;
+    color: var(--dark);
     transition: color 0.3s;
 }
 
-.navbar-menu a:hover {
-    color: #1877f2; /* Couleur au survol, similaire au bleu Facebook */
+.nav-links a:hover {
+    color: var(--primary);
 }
 
-/* Bouton du menu hamburger */
-.hamburger-menu {
-    display: none;
-    font-size: 30px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-/* Adaptabilité pour petits écrans (responsive) */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-    }
-
-    .navbar-container {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .navbar-menu {
-        flex-direction: column;
-        width: 100%;
-        display: none; /* Cache le menu par défaut sur les petits écrans */
-        background-color: #3b3b3b;
-        padding: 10px 0;
-    }
-
-    .navbar-menu li {
-        margin: 10px 20px;
-    }
-
-    .navbar-menu.open {
-        display: flex; /* Affiche le menu quand le bouton est cliqué */
-    }
-
-    .hamburger-menu {
-        display: block; /* Affiche le bouton hamburger sur les petits écrans */
-    }
-}
-.panier-icon {
-    height: 24px; /* Ajustez selon la taille souhaitée */
-    width: auto;
-    vertical-align: middle; /* Aligne l'icône avec le texte */
-    margin-right: 5px; /* Espacement entre l'icône et le texte */
-}
-
-.auth {
+.profile-button, .cart-button {
     display: flex;
-    gap: 10px; /* Espacement entre les éléments */
-    margin-left: 250px;
-  }
-  
-  .auth li {
-    order: 0; /* Par défaut, les éléments suivent l'ordre HTML */
-  }
-  
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cart-button {
+    background: var(--secondary);
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: rgb(39, 205, 66);
+    color: rgb(0, 0, 0);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.profile-button:hover, .cart-button:hover {
+    transform: translateY(-2px);
+}
+
+.cart-button:hover {
+    background: #1acb4c;
+}
+
+.profile-button:hover {
+    background: #27ae60;
+}
+
+.user-actions {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+/* ========================== Menu déroulant du panier =========================== */
+.cart-dropdown {
+    display: none;  /* Cache le menu par défaut */
+    position: absolute;
+    top: 100%;
+    right: 18%;
+    background: white;
+    border: 1px solid #ddd;
+    width: 200px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 999;
+}
+
+.cart-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-dropdown ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-dropdown .checkout-btn {
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.cart-dropdown .checkout-btn:hover {
+    background: #27ae60;
+}
+
+.cart-button:hover + .cart-dropdown {
+    display: block;  /* Affiche le menu lorsque le bouton est survolé */
+}
 
 /* ========================== Footer ========================== */
 footer {
@@ -443,7 +458,7 @@ body {
     position: relative;
     width: 250px;
     height: 400px;
-    transition: transform 1s ease-in-out;
+    transition: transform 0s ease-in-out;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -478,7 +493,7 @@ body {
     font-family: "Ruthie", cursive;
     font-weight: normal;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    color: gold;
+    color: rgb(17, 255, 0);
 }
 
 /* Back face */
@@ -502,8 +517,9 @@ body {
 .back h1 {
     margin-bottom: 20px;
     font-size: 18px;
-    color: gold;
+    color: rgb(30, 30, 30);
 }
+
 
 
 
@@ -520,7 +536,7 @@ body {
 /* Titre principal */
 h1.hello_admin {
     text-align: center;
-    color: #007bff;
+    color:#2a7104;
     margin-top: 20px;
     font-size: 2rem;
 }
@@ -533,7 +549,12 @@ h1.hello_admin {
     background: #fff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-
+.table button{
+    background-color: red;
+}
+.table button:hover{
+    background-color: rgb(54, 2, 2);
+}
 .table th, .table td {
     text-align: center;
     padding: 10px;
@@ -541,7 +562,7 @@ h1.hello_admin {
 }
 
 .table th {
-    background-color: #007bff;
+    background-color:#2a7104;
     color: white;
     font-weight: bold;
 }
@@ -595,7 +616,7 @@ h1.hello_admin {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color:#2a7104;
     color: white;
     border: none;
     border-radius: 5px;
@@ -604,7 +625,7 @@ h1.hello_admin {
 }
 
 .table2 button:hover {
-    background-color: #0056b3;
+    background-color:#2a7104;
 }
 
 /* Responsive design */
@@ -621,3 +642,177 @@ h1.hello_admin {
         width: 100%;
     }
 }
+/* ==========================Bike_Detail======================== */
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .product-page {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-images {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .product-images img {
+    width: 360px;
+    border-radius: 8px;
+  }
+  
+  .product-details {
+    flex: 1;
+    padding: 20px;
+    margin-left: 10%;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .price {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .current-price {
+    font-weight: bold;
+    color: #e63946;
+  }
+  
+  .discounted-price {
+    margin-left: 10px;
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  .availability {
+    margin: 10px 0;
+    color: #4caf50;
+  }
+  
+  .description {
+    margin: 20px 0;
+  }
+  
+  .color-size p {
+    margin: 10px 0;
+  }
+  
+  .add-to-cart {
+    padding: 10px 20px;
+    background-color:#2a7104;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 45%;
+  }
+  
+  .add-to-cart:hover {
+    background-color:#091801;
+  }
+  .description{
+    text-align: justify;
+  }
+  /* =====================Profile======================== */
+
+  /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #3498db;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.profile-bio {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.profile-details {
+    list-style-type: none;
+    padding: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.profile-details li {
+    margin-bottom: 10px;
+}
+
+.action-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: #2874a6;
+}
+/* =========================================== */

@@ -28,10 +28,10 @@ func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
 		return
 	}
-	
+
 	session := cookies.GetCookie(w, r)
 	allbike, _ := database.GetAllBikes()
-	
+
 	username := "Biker"
 	if session.Username != "" {
 		username = session.Username
@@ -44,8 +44,6 @@ func BikeListHandler(w http.ResponseWriter, r *http.Request) {
 		Session:  session,
 		Bike:     allbike,
 	}
-	
-	
 
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
@@ -154,4 +152,69 @@ func findMissingNumber(dirPath string) (int, error) {
 			return i, nil
 		}
 	}
+}
+
+func DeleteBikeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		bike_id, _ := strconv.Atoi(r.FormValue("bike_id"))
+		action := r.FormValue("delete")
+		fildPath := r.FormValue("fildPath")
+
+		session := cookies.GetCookie(w, r)
+		if session.UserID == 0 {
+			http.Redirect(w, r, "/", http.StatusSeeOther)
+		}
+
+		if action == "delete" {
+			database.DeleteBike(bike_id, fildPath)
+		}
+		http.Redirect(w, r, "/admin", http.StatusSeeOther)
+	}
+}
+
+func BikeDetailHandler(w http.ResponseWriter, r *http.Request, id int) {
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/bike_detail.html")
+	if err != nil {
+		log.Println("Error during parse template")
+	}
+	session := cookies.GetCookie(w,r)
+	oneBike, _ := database.GetOneBike(id)
+	// Création des données à envoyer au template
+	data := home.Pageinfo{
+		Title:   "Bike Detail",
+		Page:    "bike-detail",
+		Bike:    oneBike,
+		Session: session,
+	}
+	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
+		log.Println("Erreur lors de l'exécution du template:", err)
+		http.Error(w, "Erreur interne du serveur : BikeDetailHandler", http.StatusInternalServerError)
+	}
+}
+
+
+func AddToCartHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		user_id,_:=strconv.Atoi(r.FormValue("user_id")) 
+		bike_id,_:=strconv.Atoi(r.FormValue("bike_id"))
+		bike_type:=r.FormValue("bike_type")
+		price,_:=strconv.Atoi(r.FormValue("price"))
+		size,_:=strconv.Atoi(r.FormValue("size"))
+		if user_id == 0{
+			http.Redirect(w,r,"/login",http.StatusSeeOther)
+		}
+		total,verif:=database.VerifBikeId(user_id,bike_id)
+		if verif{
+			total +=1
+			database.UpdateShop(user_id,bike_id,total)
+		}else{   
+			err:=database.SaveShopToDB(user_id, bike_id, bike_type, float64(price), float64(size), total)
+		if err!=nil{
+			log.Println("Error During save form in the db",err)
+		}
+		}
+		
+	http.Redirect(w,r,"/bike-detail/"+r.FormValue("bike_id"),http.StatusSeeOther)
+	}
+	
 }

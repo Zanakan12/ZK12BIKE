@@ -54,3 +54,21 @@ func createBikesTable(db *sql.DB) {
 
 	executeSQL(db, createTableSQL)
 }
+
+func createShopTable(db *sql.DB) {
+	createTableSQL := `CREATE TABLE IF NOT EXISTS shop (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		bike_id INTEGER NOT NULL,
+		bike_type TEXT NOT NULL,
+		price REAL NOT NULL,
+		size REAL NOT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		total INTEGER NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(user_id),
+		FOREIGN KEY (bike_id) REFERENCES bikes(id)
+
+	);`
+
+	executeSQL(db, createTableSQL)
+}
