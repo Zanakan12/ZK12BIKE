@@ -11,11 +11,11 @@ Ce projet a pour objectif de créer une application web permettant :
 
 ## 🛠️ **Technologies utilisées**
 - **Langage backend :** Go (Golang)
-- **Framework web :** Echo ou Gin
-- **Base de données :** PostgreSQL ou SQLite
+- **Framework web :** Not yet
+- **Base de données :** SQLite
 - **Versionnement :** Git/GitHub
 - **Frontend :** HTML, CSS, JavaScript (intégration minimale côté Go avec templates)
-- **Paiement :** Intégration avec Stripe ou PayPal (si nécessaire)
+- **Paiement :** Intégration avec Stripe ou PayPal
 
 ---
 
