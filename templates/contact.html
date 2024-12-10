@@ -1,0 +1,23 @@
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "content"}}
+<div class="container">
+    <h1>Formulaire de Contact</h1>
+    <form action="#" method="POST">
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" placeholder="Entrez votre nom" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+
+        <label for="subject">Objet</label>
+        <input type="text" id="subject" name="subject" placeholder="Objet de votre message" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Écrivez votre message ici..." required></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+
+{{end}}

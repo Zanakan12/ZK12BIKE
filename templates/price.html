@@ -1,0 +1,50 @@
+{{define "title"}}{{.Title}}{{end}}
+{{define "content"}}
+<div class="container-price">
+    <h1>Choisissez le plan qui vous convient</h1>
+
+    <div class="pricing-cards">
+
+        <!-- Plan Basique -->
+        <div class="card-price">
+            <h2>Basique</h2>
+            <p class="price">€9.99 / mois</p>
+            <p class="description">Idéal pour les particuliers</p>
+            <ul>
+                <li>Accès illimité</li>
+                <li>1 utilisateur</li>
+                <li>Support par e-mail</li>
+            </ul>
+            <button>Souscrire</button>
+        </div>
+
+        <!-- Plan Standard -->
+        <div class="card-price">
+            <h2>Standard</h2>
+            <p class="price">€19.99 / mois</p>
+            <p class="description">Parfait pour les petites équipes</p>
+            <ul>
+                <li>Accès illimité</li>
+                <li>Jusqu'à 5 utilisateurs</li>
+                <li>Support prioritaire</li>
+            </ul>
+            <button>Souscrire</button>
+        </div>
+
+        <!-- Plan Premium -->
+        <div class="card-price">
+            <h2>Premium</h2>
+            <p class="price">€49.99 / mois</p>
+            <p class="description">Pour les entreprises et les équipes avancées</p>
+            <ul>
+                <li>Accès illimité</li>
+                <li>Utilisateurs illimités</li>
+                <li>Support 24/7</li>
+                <li>Accès aux fonctionnalités premium</li>
+            </ul>
+            <button>Souscrire</button>
+        </div>
+
+    </div>
+</div>
+{{end}}

@@ -218,3 +218,4 @@ func AddToCartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	
 }
+
