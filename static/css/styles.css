@@ -378,6 +378,31 @@ a:hover {
     margin-left: auto;
 }
 
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-google:hover {
+    background-color: #f1f1f1;
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
 /* ========================== Menu déroulant du panier =========================== */
 .cart-dropdown {
     display: none;  /* Cache le menu par défaut */
@@ -1081,4 +1106,199 @@ footer {
     }
 }
 
+/* =====================cart====================== */
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a.active {
+    color: #f39c12;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Main section */
+main {
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.panier {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.table-panier {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-panier th, .table-panier td {
+    padding: 15px;
+    text-align: left;
+}
+
+.table-panier th {
+    background-color: #f4f4f4;
+}
+
+.table-panier td {
+    border-bottom: 1px solid #ddd;
+}
+
+.article-info {
+    display: flex;
+    align-items: center;
+}
+
+.image-produit {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.nom-produit {
+    font-weight: bold;
+    color: #333;
+}
+
+.disponibilite {
+    color: #27ae60;
+}
+
+.prix {
+    color: #e74c3c;
+}
+
+.quantite {
+    display: flex;
+    align-items: center;
+}
+
+.quantite button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.quantite button:hover {
+    background-color: #2980b9;
+}
+
+.input-quantite {
+    width: 40px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.total {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Total and actions */
+.total-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.code-promo {
+    display: flex;
+}
+
+.input-promo {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.btn-valider {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-valider:hover {
+    background-color: #e67e22;
+}
+
+.total-final {
+    text-align: right;
+}
+
+.total-final p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.total-final strong {
+    font-size: 20px;
+    color: #27ae60;
+}
+
+.btn-commander {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-commander:hover {
+    background-color: #2ecc71;
+}
 /* =========================================== */

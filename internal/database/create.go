@@ -10,6 +10,7 @@ func createUsersTable(db *sql.DB) {
 		email TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL,
 		role TEXT NOT NULL,
+		profile_image TEXT,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 	);`
@@ -58,9 +59,11 @@ func createBikesTable(db *sql.DB) {
 func createShopTable(db *sql.DB) {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS shop (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		image_path TEXT,
 		user_id INTEGER NOT NULL,
 		bike_id INTEGER NOT NULL,
 		bike_type TEXT NOT NULL,
+		status TEXT,
 		price REAL NOT NULL,
 		size REAL NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

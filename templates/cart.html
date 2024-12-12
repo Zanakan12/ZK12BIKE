@@ -1,1 +1,61 @@
-<!-- Placeholder for HTML template -->
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "content"}}
+<body>
+    <main>
+        <h2>Votre Panier</h2>
+        
+        <section class="panier">
+            <table class="table-panier">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Disponibilité</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                {{range .Session.BikeShop}}
+                <tbody>
+                    
+                    <tr>
+                        <td>
+                            <div class="article-info">
+                                <img src="images/produit1.jpg" alt="Produit 1" class="image-produit">
+                                <p class="nom-produit">Bracelet Bleu - Bracelet rouge, bleu clair, bleu</p>
+                            </div>
+                        </td>
+                        <td class="disponibilite">{{.Status}}</td>
+                        <td class="prix">19,90 €</td>
+                        <td>
+                            <div class="quantite">
+                                <button class="moins">-</button>
+                                <input type="number" value="1" min="1" class="input-quantite">
+                                <button class="plus">+</button>
+                            </div>
+                        </td>
+                        <td class="total">19,90 €</td>
+                    </tr>
+                </tbody>
+                {{end}}
+            </table>
+            
+            <!-- Total et actions -->
+            <div class="total-actions">
+                <div class="code-promo">
+                    <input type="text" placeholder="Code promo" class="input-promo">
+                    <button class="btn-valider">Valider</button>
+                </div>
+                <div class="total-final">
+                    <p>Total Produits : <span>64,90 €</span></p>
+                    <p>Total Livraison : <span>5,00 €</span></p>
+                    <p><strong>Total : 69,90 €</strong></p>
+                    <button class="btn-commander">Valider votre commande</button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+</body>
+{{end}}

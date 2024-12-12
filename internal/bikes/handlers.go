@@ -177,7 +177,7 @@ func BikeDetailHandler(w http.ResponseWriter, r *http.Request, id int) {
 	if err != nil {
 		log.Println("Error during parse template")
 	}
-	session := cookies.GetCookie(w,r)
+	session := cookies.GetCookie(w, r)
 	oneBike, _ := database.GetOneBike(id)
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
@@ -192,30 +192,49 @@ func BikeDetailHandler(w http.ResponseWriter, r *http.Request, id int) {
 	}
 }
 
-
 func AddToCartHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
-		user_id,_:=strconv.Atoi(r.FormValue("user_id")) 
-		bike_id,_:=strconv.Atoi(r.FormValue("bike_id"))
-		bike_type:=r.FormValue("bike_type")
-		price,_:=strconv.Atoi(r.FormValue("price"))
-		size,_:=strconv.Atoi(r.FormValue("size"))
-		if user_id == 0{
-			http.Redirect(w,r,"/login",http.StatusSeeOther)
+		user_id, _ := strconv.Atoi(r.FormValue("user_id"))
+		bike_id, _ := strconv.Atoi(r.FormValue("bike_id"))
+		bike_type := r.FormValue("bike_type")
+		price, _ := strconv.Atoi(r.FormValue("price"))
+		size, _ := strconv.Atoi(r.FormValue("size"))
+		bikes, _ := database.GetOneBike(bike_id)
+		image_path := ""
+		status := ""
+		if len(bikes) > 0 {
+			bike := bikes[0]
+			image_path = bike.ImagePath
+			status = bike.Status
 		}
-		total,verif:=database.VerifBikeId(user_id,bike_id)
-		if verif{
-			total +=1
-			database.UpdateShop(user_id,bike_id,total)
-		}else{   
-			err:=database.SaveShopToDB(user_id, bike_id, bike_type, float64(price), float64(size), total)
-		if err!=nil{
-			log.Println("Error During save form in the db",err)
+
+		if user_id == 0 {
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
 		}
+		total, verif := database.VerifBikeId(user_id, bike_id)
+		if verif {
+			total++
+			database.UpdateShop(user_id, bike_id, total)
+		} else {
+			err := database.SaveShopToDB(user_id, bike_id, bike_type, image_path, status, float64(price), float64(size), total)
+			if err != nil {
+				log.Println("Error During save form in the db", err)
+			}
 		}
-		
-	http.Redirect(w,r,"/bike-detail/"+r.FormValue("bike_id"),http.StatusSeeOther)
+
+		http.Redirect(w, r, "/bike-detail/"+r.FormValue("bike_id"), http.StatusSeeOther)
 	}
-	
+
 }
 
+func UpdateStatusHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		bike_id, _ := strconv.Atoi(r.FormValue("bike_id"))
+		status := r.FormValue("status")
+		err := database.UpdateStatus(bike_id, status)
+		if err != nil {
+			log.Println("erreur lors du  changement du status: %v", err)
+		}
+	}
+	http.Redirect(w, r, "/admin", http.StatusSeeOther)
+}

@@ -21,9 +21,11 @@ type Bike struct {
 }
 type BikeShop struct {
 	ID        int
+	ImagePath string
 	UserID    string
 	BikeID    string
 	BikeType  string
+	Status 	  string
 	Price	  float64
 	Size	  float64
 	Total	  int
@@ -199,13 +201,16 @@ func GetOneBike(id int) ([]Bike, error) {
 	}
 	return bikes, nil
 }
+
+
+
 func GetShopBike(user_id int) ([]BikeShop, int, error) {
 	db := SetupDatabase()
 	defer db.Close()
 
 	
-	totalAmount := 0         // Somme des totaux de chaque vélo
-	query := "SELECT id, user_id, bike_id, bike_type, price, size, total, created_at FROM shop WHERE user_id = ?"
+	totalAmount := 0        // Somme des totaux de chaque vélo
+	query := "SELECT id, image_path, user_id, bike_id, bike_type, status, price, size, total, created_at FROM shop WHERE user_id = ?"
 	rows, err := db.Query(query, user_id)
 	if err != nil {
 		return nil, totalAmount, fmt.Errorf("erreur lors de l'exécution de la requête : %v", err)
@@ -218,9 +223,11 @@ func GetShopBike(user_id int) ([]BikeShop, int, error) {
 		var bike BikeShop
 		err = rows.Scan(
 			&bike.ID,
+			&bike.ImagePath,
 			&bike.UserID,
 			&bike.BikeID,
 			&bike.BikeType,
+			&bike.Status,
 			&bike.Price,
 			&bike.Size,
 			&bike.Total,      // On récupère la colonne `total`

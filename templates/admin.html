@@ -21,10 +21,8 @@
     </thead>
     <tbody>
         {{range .Bike}}
-        <form action="/delete" method="post">
+        
         <tr>
-            <input type="hidden" name="fildPath" name="fildPath" value="{{.ImagePath}}">
-            <input type="hidden" name="bike_id" value="{{.ID}}">
             <td>{{.ID}}</td>
             <td><img src="{{.ImagePath}}" alt="Bike Image" width="100"></td>
             <td>{{.BikeType}}</td>
@@ -33,11 +31,24 @@
             <td>{{.Battery}} W</td>
             <td>{{.Speed}} KM/H</td>
             <td>{{.Autonomy}} KM</td>
-            <td>{{.Status}}</td>
+            <td>
+            <form id="form" action="/update-status" method="POST">
+                <input type="hidden" name="bike_id" value="{{.ID}}">
+                <select name="status" id="status" onchange="this.form.submit()">
+                    <option value="disponible" {{if eq .Status "disponible"}}selected{{end}}>Disponible</option>
+                    <option value="loue" {{if eq .Status "loue"}}selected{{end}}>Loué</option>
+                    <option value="indisponible" {{if eq .Status "indisponible"}}selected{{end}}>Indisponible</option>
+                </select>
+            </form>
+            </td>
             <td>{{.Price}}€</td>
-            <td> <button type="submit" name="delete" value="delete">✘</button>
+            <form action="/delete" method="post">
+                <input type="hidden" name="fildPath" name="fildPath" value="{{.ImagePath}}">
+                <input type="hidden" name="bike_id" value="{{.ID}}">
+                <td> <button type="submit" name="delete" value="delete">✘</button>
+            </form>    
         </tr>
-    </form>
+    
         {{end}}
     </tbody>
 </table>

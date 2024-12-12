@@ -60,16 +60,16 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		role := "user"
-		// if username == "Zanakan"{
-		// 	role = "admin"
-		// }
+		if username == "Zanakan"{
+			role = "admin"
+		}
 		// Créer et sauvegarder l'utilisateur
 		user := Users{
 			Name:     username,
 			Email:    email,
 			Role:     role,
 			Password: string(hashedPassword)}
-		if err := database.SaveUserToDB(user.Name, user.Email, user.Password, user.Role); err != nil {
+		if err := database.SaveUserToDB(user.Name, user.Email, user.Password, user.Role,"none"); err != nil {
 			tmpl.ExecuteTemplate(w, "base.html", map[string]string{"Error": "Erreur lors de l'enregistrement"})
 			fmt.Println("error to write into db")
 			return
@@ -154,23 +154,26 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 func AdminPanelHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse les fichiers de template
 	tmpl, err := template.ParseFiles("templates/base.html", "templates/navbar.html", "templates/admin.html")
+	session := cookies.GetCookie(w, r)
+	if session.Username == "Zanakan" {
+		session.Role = "admin"
+	}
+	if session.UserID == 0 || session.Role != "admin"{
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	
 	if err != nil {
 		fmt.Println("Erreur lors du parsing des templates:", err)
 		http.Error(w, "Erreur interne du serveur", http.StatusInternalServerError)
 		return
 	}
 
-	session := cookies.GetCookie(w, r)
-	if session.UserID == 0 {
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-	}
-
 	allbike, _ := database.GetAllBikes()
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
-		Title: "Admin-Panel",
-		Page:  "Admin",
-		Bike:  allbike,
+		Title:   "Admin-Panel",
+		Page:    "Admin",
+		Bike:    allbike,
 		Session: session,
 	}
 	// Exécution du template
@@ -192,7 +195,7 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	if session.UserID == 0 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-	bikeList,_,_ := database.GetShopBike(session.UserID)
+	bikeList, _, _ := database.GetShopBike(session.UserID)
 
 	// On parcourt chaque vélo dans le panier
 	var shopBike []database.Bike
@@ -207,12 +210,52 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	//
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
-		Title:   "Profile",
-		Page:    "Profile",
-		Session: session,
-		Bike:    shopBike,
+		Title:    "Profile",
+		Page:     "Profile",
+		Session:  session,
+		Bike:     shopBike,
 		BikeShop: bikeList,
-		
+	}
+	// Exécution du template
+	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {
+		log.Println("Erreur lors de l'exécution du template:", err)
+		http.Error(w, "Erreur interne du serveur 2", http.StatusInternalServerError)
+	}
+}
+
+func CartHandler(w http.ResponseWriter, r *http.Request) {
+
+	tmpl, err := template.ParseFiles("templates/index.html", "templates/base.html", "templates/navbar.html", "templates/cart.html")
+	if err != nil {
+		log.Println("Erreur lors du chargement du template:", err)
+		http.Error(w, "Erreur interne du serveur 1", http.StatusInternalServerError)
+		return
+	}
+	
+	session := cookies.GetCookie(w, r)
+	if session.UserID == 0 {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	bikeList, _, _ := database.GetShopBike(session.UserID)
+
+	// On parcourt chaque vélo dans le panier
+	var shopBike []database.Bike
+	for i := range bikeList {
+		// Récupère l'ID du vélo à partir de l'objet bikeList[i]
+		bikeID := bikeList[i].ID
+
+		// Récupère les détails de ce vélo en utilisant son ID
+		shopBike, _ = database.GetOneBike(bikeID)
+
+	}
+	//
+	// Création des données à envoyer au template
+	data := home.Pageinfo{
+		Title:    "Profile",
+		Page:     "Profile",
+		Session:  session,
+		Bike:     shopBike,
+		BikeShop: bikeList,
 	}
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {

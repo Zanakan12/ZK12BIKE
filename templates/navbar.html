@@ -5,10 +5,12 @@
         <circle cx="12" cy="12" r="10"/>
         <path d="M12 12l4-4m-4 4l-4-4m4 4v8"/>
       </svg>
-      <a href="/">E-Bikes Location</a>
+      E-Bikes Location
     </div>
     <div class="nav-links">
-      <a href="/admin">Admin-Panel</a>
+      {{if eq .Session.Role "admin"}}
+          <a href="/admin">Admin-Panel</a>
+      {{end}}
       <a href="/bike-list">Vélos</a>
       <a href="/price">Tarifs</a>
       <a href="/location">Emplacements</a>
@@ -36,7 +38,7 @@
               <strong>Total :</strong> {{.Session.Cart}} articles
             </li>
           </ul>
-          <a href="/checkout" class="checkout-btn">Passer à la caisse</a>
+          
         </div>
         {{if eq .Username "Biker"}}
             <a href="/login" class="profile-button">
