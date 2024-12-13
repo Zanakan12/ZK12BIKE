@@ -47,3 +47,21 @@ func UpdateStatus(id int, status string)error{
 	log.Println(id, status)
 	return nil
 }
+
+func AddSub(total, bike_id int)error{
+	db := SetupDatabase()
+	defer db.Close()
+
+	query := " UPDATE shop SET total = ? WHERE bike_id = ?"
+
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		return fmt.Errorf("erreur lors de la préparation de la requête Update status : %v", err)
+	}
+	defer stmt.Close()
+	_, err = stmt.Exec(total,bike_id)
+	if err != nil{
+		return fmt.Errorf("erreur lors de l'exécution de la requête : %v", err)
+	}
+	return nil
+}

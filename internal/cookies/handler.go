@@ -65,7 +65,7 @@ func GetSession(sessionID string) (Session, bool) {
 	mutex.RLock()
 	defer mutex.RUnlock()
 	session, exists := sessions[sessionID]
-	session.BikeShop,session.Cart,_ = database.GetShopBike(session.UserID)
+	session.BikeShop,session.Cart,_,_ = database.GetShopBike(session.UserID)
 	
 	return session, exists
 }

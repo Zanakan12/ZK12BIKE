@@ -11,6 +11,7 @@ type Pageinfo struct {
 	Logo     string
 	Username string
 	Cart	 int
+	AllCart  float64
 	Session  cookies.Session
 	Bike     []database.Bike
 	BikeShop []database.BikeShop

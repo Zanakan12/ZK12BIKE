@@ -56,6 +56,7 @@ func main() {
 	http.HandleFunc("/delete", bikes.DeleteBikeHandler)
 	http.HandleFunc("/upload", bikes.UploadFile)
 	http.HandleFunc("/update-status", bikes.UpdateStatusHandler )
+	http.HandleFunc("/add-sub", bikes.AddSubHandler)
 	//http.HandleFunc("/pay",users.PayHandler)
 	// route to handlers make the route before the running server
 	fmt.Println("The server is start on http://localhost" + port)

@@ -195,7 +195,7 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	if session.UserID == 0 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-	bikeList, _, _ := database.GetShopBike(session.UserID)
+	bikeList, _, _,_:= database.GetShopBike(session.UserID)
 
 	// On parcourt chaque vélo dans le panier
 	var shopBike []database.Bike
@@ -236,7 +236,7 @@ func CartHandler(w http.ResponseWriter, r *http.Request) {
 	if session.UserID == 0 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-	bikeList, _, _ := database.GetShopBike(session.UserID)
+	bikeList, _, allCart,_ := database.GetShopBike(session.UserID)
 
 	// On parcourt chaque vélo dans le panier
 	var shopBike []database.Bike
@@ -251,11 +251,12 @@ func CartHandler(w http.ResponseWriter, r *http.Request) {
 	//
 	// Création des données à envoyer au template
 	data := home.Pageinfo{
-		Title:    "Profile",
-		Page:     "Profile",
+		Title:    "Panier",
+		Page:     "panier",
 		Session:  session,
 		Bike:     shopBike,
-		BikeShop: bikeList,
+		BikeShop: bikeList,	
+		AllCart:  allCart,	
 	}
 	// Exécution du template
 	if err := tmpl.ExecuteTemplate(w, "base.html", data); err != nil {

@@ -22,20 +22,23 @@
                     <tr>
                         <td>
                             <div class="article-info">
-                                <img src="images/produit1.jpg" alt="Produit 1" class="image-produit">
-                                <p class="nom-produit">Bracelet Bleu - Bracelet rouge, bleu clair, bleu</p>
+                                <img src="{{.ImagePath}}" alt="Produit 1" class="image-produit">
+                                <p class="nom-produit">{{.BikeType}} - Taille: {{.Size}} ", bleu</p>
                             </div>
                         </td>
                         <td class="disponibilite">{{.Status}}</td>
-                        <td class="prix">19,90 €</td>
+                        <td class="prix">{{.Price}}€</td>
                         <td>
-                            <div class="quantite">
-                                <button class="moins">-</button>
-                                <input type="number" value="1" min="1" class="input-quantite">
-                                <button class="plus">+</button>
-                            </div>
+                            <form action= "/add-sub" method="POST"> 
+                                <div class="quantite">
+                                        <input type="hidden" name="bike_id" value="{{.BikeID}}">
+                                        <button name="action" value="sub" class="moins">-</button>
+                                            <input name="total" type="textbox" value="{{.Total}}" min="1" class="input-quantite">
+                                        <button name="action" value="add" class="plus">+</button>
+                                </div>
+                            </form>
                         </td>
-                        <td class="total">19,90 €</td>
+                        <td class="total">{{.TotalPrice}} €</td>
                     </tr>
                 </tbody>
                 {{end}}
@@ -47,10 +50,10 @@
                     <input type="text" placeholder="Code promo" class="input-promo">
                     <button class="btn-valider">Valider</button>
                 </div>
-                <div class="total-final">
-                    <p>Total Produits : <span>64,90 €</span></p>
-                    <p>Total Livraison : <span>5,00 €</span></p>
-                    <p><strong>Total : 69,90 €</strong></p>
+                <div class="total-final">           
+                        <p>Total Produits : <span>{{.AllCart}}€</span></p>
+                    <p>Total Livraison : <span>0,00 €</span></p>
+                    <p><strong>Total : {{.AllCart}}€</strong></p>
                     <button class="btn-commander">Valider votre commande</button>
                 </div>
             </div>

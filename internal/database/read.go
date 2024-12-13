@@ -20,16 +20,18 @@ type Bike struct {
 	CreatedAt string
 }
 type BikeShop struct {
-	ID        int
-	ImagePath string
-	UserID    string
-	BikeID    string
-	BikeType  string
-	Status 	  string
-	Price	  float64
-	Size	  float64
-	Total	  int
-	CreatedAt string
+	ID         int
+	ImagePath  string
+	UserID     string
+	BikeID     string
+	BikeType   string
+	Status     string
+	Price      float64
+	Size       float64
+	Total      int
+	TotalPrice float64
+	AllCart    float64
+	CreatedAt  string
 }
 
 func GetUserId(username string) int {
@@ -202,21 +204,19 @@ func GetOneBike(id int) ([]Bike, error) {
 	return bikes, nil
 }
 
-
-
-func GetShopBike(user_id int) ([]BikeShop, int, error) {
+func GetShopBike(user_id int) ([]BikeShop, int, float64,error) {
 	db := SetupDatabase()
 	defer db.Close()
 
-	
-	totalAmount := 0        // Somme des totaux de chaque vélo
+	totalAmount := 0           // Somme des totaux de chaque vélo
+	totalCartPrice := 0.0      // Somme des prix de tous les vélos ajoutés au panier
 	query := "SELECT id, image_path, user_id, bike_id, bike_type, status, price, size, total, created_at FROM shop WHERE user_id = ?"
 	rows, err := db.Query(query, user_id)
 	if err != nil {
-		return nil, totalAmount, fmt.Errorf("erreur lors de l'exécution de la requête : %v", err)
+		return nil, 0, 0, fmt.Errorf("erreur lors de l'exécution de la requête : %v", err)
 	}
 	defer rows.Close()
-	
+
 	var bikes []BikeShop
 
 	for rows.Next() {
@@ -230,21 +230,24 @@ func GetShopBike(user_id int) ([]BikeShop, int, error) {
 			&bike.Status,
 			&bike.Price,
 			&bike.Size,
-			&bike.Total,      // On récupère la colonne `total`
-			&bike.CreatedAt,  // On récupère la colonne `created_at`
+			&bike.Total,     // On récupère la colonne `total`
+			&bike.CreatedAt, // On récupère la colonne `created_at`
 		)
 		if err != nil {
-			return nil, totalAmount, fmt.Errorf("erreur lors de l'analyse des données : %v", err)
+			return nil, totalAmount,totalCartPrice, fmt.Errorf("erreur lors de l'analyse des données : %v", err)
 		}
-		bikes = append(bikes, bike) 
-		totalAmount += bike.Total    // On additionne la valeur de `total`
+
+		bike.TotalPrice = bike.Price * float64(bike.Total) // Calcul du prix total pour ce vélo
+		totalCartPrice += bike.TotalPrice                  // Ajout au total général du panier
+		totalAmount += bike.Total                         // On additionne la quantité totale de vélos
+		bikes = append(bikes, bike)                       // Ajout du vélo à la liste
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, totalAmount, fmt.Errorf("erreur pendant l'itération : %v", err)
+		return nil, totalAmount, totalCartPrice, fmt.Errorf("erreur pendant l'itération : %v", err)
 	}
-
-	return bikes, totalAmount, nil
+	log.Println(totalCartPrice)
+	return bikes, totalAmount,totalCartPrice, nil
 }
 
 
@@ -258,7 +261,7 @@ func VerifBikeId(user_id, bike_id int) (int, bool) {
 	var total int
 	// On exécute la requête avec QueryRow, car on veut seulement 1 résultat
 	err := db.QueryRow(query, user_id, bike_id).Scan(&bikeID,
-													&total)
+		&total)
 	if err != nil {
 		// Si on ne trouve rien, on retourne 0 et false
 		if err == sql.ErrNoRows {
@@ -269,4 +272,4 @@ func VerifBikeId(user_id, bike_id int) (int, bool) {
 	fmt.Println(total)
 	// Si un bike_id est trouvé, on le retourne avec true
 	return total, true
-}	
+}

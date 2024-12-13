@@ -233,8 +233,33 @@ func UpdateStatusHandler(w http.ResponseWriter, r *http.Request) {
 		status := r.FormValue("status")
 		err := database.UpdateStatus(bike_id, status)
 		if err != nil {
-			log.Println("erreur lors du  changement du status: %v", err)
+			log.Println("erreur lors du  changement du status:", err)
 		}
 	}
 	http.Redirect(w, r, "/admin", http.StatusSeeOther)
+}
+
+func AddSubHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		action := r.FormValue("action")
+		bike_id, _ := strconv.Atoi(r.FormValue("bike_id"))
+		total, _ := strconv.Atoi(r.FormValue("total"))
+
+		if action == "sub" {
+			total--
+			if total == 0 {
+				database.DeleteToCart(bike_id)
+				http.Redirect(w, r, "/cart", http.StatusSeeOther)
+			}
+			
+		} else {
+			total++
+		}
+		log.Println("total:", total, "bike:", bike_id, "action:", action)
+		err := database.AddSub(total, bike_id)
+		if err != nil {
+			log.Println("erreur lors de la reduction d'article dans la database")
+		}
+	}
+	http.Redirect(w, r, "/cart", http.StatusSeeOther)
 }
