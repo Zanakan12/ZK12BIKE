@@ -34,72 +34,11 @@ Ce projet a pour objectif de créer une application web permettant :
 
 ---
 
-## 🌟 **User Stories**
-1. **En tant qu'utilisateur non inscrit,**
-   Je veux pouvoir consulter les vélos disponibles  
-   Afin de décider si je veux m'inscrire ou louer/acheter un vélo.
-
-2. **En tant qu'utilisateur inscrit,**
-   Je veux pouvoir réserver un vélo pour une durée déterminée  
-   Afin de m'assurer qu'il soit disponible à la date choisie.
-
-3. **En tant qu'administrateur,**
-   Je veux pouvoir ajouter ou modifier les vélos dans le catalogue  
-   Afin de maintenir un inventaire précis et à jour.
-
-4. **En tant qu'utilisateur inscrit,**
-   Je veux pouvoir accéder à mon espace personnel  
-   Afin de consulter l'historique de mes commandes ou réservations.
-
----
-
-## 🚀 [**Workflow Agile**](https://www.notion.so/14a010d5f2e880ca8d09ef960f6d368c?v=14a010d5f2e88120b02d000c1969f2fe)
-
-### **Sprint 1 : Analyse et Conception**
-- **User Stories :**
-  - Explorer les vélos sans se connecter.
-  - Page d’accueil avec mise en avant des offres spéciales.
-- **Tâches :**
-  - Rédiger toutes les User Stories.
-  - Créer le schéma UML pour la base de données.
-  - Réaliser les wireframes des principales pages.
-
-### **Sprint 2 : Développement Backend**
-- **User Stories :**
-  - Enregistrer les utilisateurs dans une base de données.
-  - Réserver un vélo.
-- **Tâches :**
-  - Créer les modèles (users, bikes, orders).
-  - Configurer la base de données avec Go.
-  - Développer les API pour les vélos et les commandes.
-
-### **Sprint 3 : Développement Frontend**
-- **User Stories :**
-  - Afficher une liste de vélos avec filtres (prix, disponibilité).
-  - Intégrer un panier d’achat.
-- **Tâches :**
-  - Créer les templates HTML pour chaque page.
-  - Ajouter de l'interactivité avec JavaScript.
-
-### **Sprint 4 : Tests et Intégration**
-- **User Stories :**
-  - Vérifier que les réservations sont correctement enregistrées.
-  - S'assurer que les paiements fonctionnent.
-- **Tâches :**
-  - Effectuer des tests unitaires sur le backend.
-  - Tester l’interface utilisateur.
-
-### **Sprint 5 : Déploiement et Documentation**
-- Préparer une documentation claire pour les développeurs et les utilisateurs.
-- Déployer l’application sur un serveur (ex. : Heroku, AWS).
-
----
-
 ## 🛠️ **Installation et Lancement**
 ### 1. Clone du projet
 ```bash
-git clone https://github.com/<ton-username>/bikerentbuy.git
-cd bikerentbuy
+git clone https://github.com/<ton-username>/zk12ebike.git
+cd zk12ebike
 ```
 
 ### 2. Configuration des dépendances
@@ -140,13 +79,6 @@ Accédez à l'application à l'adresse : [http://localhost:8080](http://localhos
 - [ ] Intégration du paiement en ligne.
 - [ ] Tests et déploiement.
 
----
-V
-## 📖 **Documentation technique**
-- **Framework choisi :** Gin/Echo pour les routes web.
-- **Modèle de données :** Voir la section UML ci-dessous.
-
----
 
 ## 🖼️ **Diagramme UML [Architecture de la base de données](https://dbdiagram.io/d/dbZK12EBIKE-6745d6fae9daa85acac4d8a6)**
 
