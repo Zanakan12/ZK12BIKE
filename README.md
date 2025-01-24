@@ -37,7 +37,7 @@ Ce projet a pour objectif de créer une application web permettant :
 ## 🛠️ **Installation et Lancement**
 ### 1. Clone du projet
 ```bash
-git clone https://github.com/<ton-username>/zk12ebike.git
+git clone https://github.com/zanakan12/zk12ebike.git
 cd zk12ebike
 ```
 
@@ -58,7 +58,7 @@ DB_NAME=bikerentbuy
 ```
 
 ### 4. Exécutez les migrations
-Ajoutez les migrations SQL (via un outil comme GORM ou SQL directement). Exemple :
+Ajoutez les migrations SQLITE. Exemple :
 ```bash
 go run main.go migrate
 ```
