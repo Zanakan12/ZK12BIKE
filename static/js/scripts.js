@@ -20,3 +20,7 @@ function searchItems() {
     }
   });
 }
+
+const recentBike = document.getElementById("recent-bike");
+
+recentBike.recentBike.backgroundColor = "red";

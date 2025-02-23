@@ -105,7 +105,7 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == http.MethodPost {
 		bike_type := r.FormValue("bike_type")
-		size, _ := strconv.Atoi(r.FormValue("size"))
+		size, _ := strconv.ParseFloat("27.5", 64)
 		motor_type := r.FormValue("motor_type")
 		speed, _ := strconv.Atoi(r.FormValue("speed"))
 		autonomy, _ := strconv.Atoi(r.FormValue("autonomy"))
@@ -251,7 +251,7 @@ func AddSubHandler(w http.ResponseWriter, r *http.Request) {
 				database.DeleteToCart(bike_id)
 				http.Redirect(w, r, "/cart", http.StatusSeeOther)
 			}
-			
+
 		} else {
 			total++
 		}

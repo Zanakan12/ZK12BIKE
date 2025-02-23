@@ -45,6 +45,12 @@ body {
   line-height: 1.5;
   text-align: left;
 }
+#recent-bike{
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
 .right-section,
 .left-section {
   margin-top: 90px;
