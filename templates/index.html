@@ -1,44 +1,56 @@
-{{ define "title" }}Page d'Accueil{{ end }}
-
-{{ define "content" }}
+{{ define "title" }}Page d'Accueil{{ end }} {{ define "content" }}
 <body>
-    <h1 class="hello">Bonjour, {{ .Username}} !</h1>
-    <div class="main-content-container">
-        <!-- Section principale gauche -->
-        <div class="left-section">
-            <h1>LOCATION E-BIKES</h1>
-            <p>Conduisez dans la ville avec joie et confort, pour les véritables amoureux d'aventure.</p>
-            {{if eq .Username "Biker"}}
-            <a href="/register" class="cta-button">Commencer Maintenant</a>
-            <div class="app-download">
-                <p>Téléchargez l'application</p>
-                <a href="#"><img src="/static/images/playstore.png" alt="Play Store"></a>
-                <a href="#"><img src="/static/images/appstore.png" alt="App Store"></a>
-            </div>
-            {{end}}
-        </div>
+  <h1 class="hello">Bonjour, {{ .Username}} !</h1>
+  <div class="input-search">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M10 2a8 8 0 0 1 5.3 14.3l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 4.2 10.2A6 6 0 0 0 10 4z"/>
+    </svg>
+    <input type="text" class="placeholder" placeholder="Rechercher un vélo" />
+  </div>
+  <div class="main-content-container">
+    <!-- Section principale gauche -->
+    <div class="left-section">
+      <span>LOCATION E-BIKES</span>
+      <p>
+        Conduisez dans la ville avec joie et confort, pour les véritables
+        amoureux d'aventure.
+      </p>
 
-        
-        <!-- Image du vélo au centre -->
-        <div class="bike-image">
-            <img src="/static/images/bike1.png" alt="eBike image">
-        </div>
-        
-        <!-- Informations supplémentaires à droite -->
-        <div class="right-section">
-            <div class="info-box">
-                <h3>Réservation rapide</h3>
-                <p>Louez un vélo directement depuis l'application.</p>
-            </div>
-            <div class="info-box">
-                <h3>Prix abordable</h3>
-                <p>Balades à partir de 1,99 € par heure.</p>
-            </div>
-            <div class="info-box">
-                <h3>Différents modèles</h3>
-                <p>Des vélos pour les amateurs et les passionnés.</p>
-            </div>
-        </div>
+      {{if eq .Username "Biker"}}
+      <a href="/register" class="cta-button">Commencer Maintenant</a>
+      <div class="app-download">
+        <p>Téléchargez l'application</p>
+        <a href="#"
+          ><img src="/static/images/playstore.png" alt="Play Store"
+        /></a>
+        <a href="#"
+          ><img src="/static/images/appstore.png" alt="App Store"
+        /></a>
+      </div>
+      {{end}}
     </div>
+
+    <!-- Image du vélo au centre -->
+    <div class="bike-image">
+      <img src="/static/images/bike1.png" alt="eBike image" />
+    </div>
+
+    <!-- Informations supplémentaires à droite -->
+    <div class="right-section">
+      <div class="info-box">
+        <h3>Réservation rapide</h3>
+        <p>Louez un vélo directement depuis l'application.</p>
+      </div>
+      <div class="info-box">
+        <h3>Prix abordable</h3>
+        <p>Balades à partir de 1,99 € par heure.</p>
+      </div>
+      <div class="info-box">
+        <h3>Différents modèles</h3>
+        <p>Des vélos pour les amateurs et les passionnés.</p>
+      </div>
+    </div>
+  </div>
 </body>
 {{ end }}

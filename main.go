@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -18,10 +17,10 @@ const port = ":8080"
 func main() {
 
 	// Charger les variables d'environnement
-	err := auth.LoadEnvFile(".env")
-	if err != nil {
-		log.Fatalf("Erreur de chargement du fichier .env: %v", err)
-	}
+	//err := auth.LoadEnvFile(".env")
+	//if err != nil {
+		//log.Fatalf("Erreur de chargement du fichier .env: %v", err)
+	//}
 
 	database.SetupDatabase()
 	//Serve the static directory
