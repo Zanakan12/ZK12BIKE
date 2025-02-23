@@ -32,7 +32,6 @@ body {
   height: 60%;
   display: flex;
   flex-direction: column;
-  border: 1px solid #0e0a0a;
   gap: 25px;
 }
 
@@ -46,15 +45,16 @@ body {
   line-height: 1.5;
   text-align: left;
 }
-.right-section, .left-section{
+.right-section,
+.left-section {
   margin-top: 90px;
 }
-.input-search{
+.input-search {
   position: absolute;
-  left: 45%;
+  left: 42.3%;
   margin-top: 50px;
   margin-bottom: 10px;
-  width:15%;
+  width: 15%;
   height: 50px;
   display: flex;
   justify-content: center !important;
@@ -83,14 +83,16 @@ body {
 }
 
 .cta-button {
-  align-self: center;
+  align-self: left;
   margin-top: 100px;
   padding: 15px 25px;
   background-color: #1c1b1b;
   color: #fff;
   text-decoration: none;
   border-radius: 50px;
+  width: 225px;
 }
+
 .cta-button :hover {
   background-color: #837272;
 }
@@ -522,13 +524,9 @@ footer {
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-}
 
 .card-container {
+  margin-top: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -556,6 +554,13 @@ body {
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
 }
 
+.front span {
+  font-size: 1.5rem;
+  color: #308800;
+  font-weight: bold;
+  margin-top: 80px;
+}
+
 .front,
 .back {
   width: 100%;
@@ -579,7 +584,7 @@ body {
   width: 100%;
   height: 60%;
   object-fit: cover;
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
 }
 
 .front h1 {
@@ -595,8 +600,8 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding: 1.5rem;
-  background-color: #4a90e2;
-  color: #ffffff;
+  background-color: #c4c4c4;
+  color: #000000;
   transform: rotateY(180deg);
 }
 

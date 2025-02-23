@@ -28,7 +28,9 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	//start the the server :
+
 	http.HandleFunc("/", home.HomeHandler)
+	http.HandleFunc("/search", home.HandleSearch)
 	http.HandleFunc("/register", users.RegisterHandler)
 	http.HandleFunc("/login", users.LoginHandler)
 	http.HandleFunc("/logout", users.LogoutHandler)
