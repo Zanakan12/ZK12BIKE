@@ -1,22 +1,22 @@
 <nav class="navbar">
   <div class="navbar-content">
-    <div class="logo">
+    <div class="logo" id="logo">
       <a href="/">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10"/>
         <path d="M12 12l4-4m-4 4l-4-4m4 4v8"/>
       </svg>
+      ZK12 E-BIKES
       </a>
-      ZK12 E-Bikes
     </div>
     <div class="nav-links">
       {{if eq .Session.Role "admin"}}
           <a href="/admin">Admin-Panel</a>
       {{end}}
-      <a href="/bike-list">Vélos</a>
-      <a href="/price">Tarifs</a>
-      <a href="/location">Emplacements</a>
-      <a href="/contact">Contact</a>
+      <a href="/bike-list" id="href-bike-list">Vélos</a>
+      <a href="/price" id="href-price">Tarifs</a>
+      <a href="/location" id="href-location">Emplacements</a>
+      <a href="/contact" href="href-contact">Contact</a>
       <div class="user-actions">
         <a href="/cart" class="cart-button">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

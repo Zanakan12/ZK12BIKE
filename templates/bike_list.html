@@ -10,7 +10,7 @@
     id="searchInput"
     type="text"
     class="placeholder"
-    placeholder="Rechercher un vélo"
+    placeholder="type,size,motor"
     oninput="searchItems()"
   />
  
@@ -27,11 +27,11 @@
         <h1>Caractéristiques</h1>
         <ul>
           <li><strong>Type :</strong> {{.BikeType}}</li>
-          <li><strong>Taille :</strong> {{.Size}}</li>
+          <li><strong>Taille :</strong> {{.Size}}"</li>
           <li><strong>Type moteur :</strong> {{.MotorType}}</li>
-          <li><strong>Batterie :</strong> {{.Battery}}</li>
-          <li><strong>Vitesse :</strong> {{.Speed}}</li>
-          <li><strong>Autonomie :</strong> {{.Autonomy}}</li>
+          <li><strong>Batterie :</strong> {{.Battery}}W</li>
+          <li><strong>Vitesse :</strong> {{.Speed}} KM/H</li>
+          <li><strong>Autonomie :</strong> {{.Autonomy}} KM</li>
           <li><strong>Prix :</strong> {{.Price}}€/jour</li>
         </ul>
       </div>

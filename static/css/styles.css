@@ -45,7 +45,7 @@ body {
   line-height: 1.5;
   text-align: left;
 }
-#recent-bike{
+#recent-bike {
   margin-top: 20px;
   width: 200px;
   height: 200px;
@@ -55,13 +55,14 @@ body {
 .left-section {
   margin-top: 90px;
 }
+
 .input-search {
   position: absolute;
   left: 42.3%;
   margin-top: 50px;
   margin-bottom: 10px;
   width: 15%;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: center !important;
   align-items: center !important;
@@ -75,14 +76,14 @@ body {
   width: 20px;
   height: 20px;
   fill: #0d7c15;
-  margin-right: 5px;
+  margin-right: 2px;
 }
 .placeholder {
   color: #313131;
   font-size: 1.2em;
   background-color: #555;
   align-self: center important;
-  width: 200px !important;
+  width: 80% !important;
   height: 49px !important;
   margin-bottom: 0 !important;
   border: none !important;
@@ -102,6 +103,7 @@ body {
 .cta-button :hover {
   background-color: #837272;
 }
+
 .app-download {
   margin-top: 200px;
   margin-left: 10px;
@@ -296,6 +298,20 @@ a:hover {
 
 /* ========================== Navbar =========================== */
 
+#logo {
+  display: flex;
+  margin-left: 5%;
+}
+
+/* Target the anchor inside the .logo class */
+.logo a,
+.logo a:visited,
+.logo a:hover,
+.logo a:active {
+  color: inherit; /* or a fixed color like #000 */
+  text-decoration: none; /* removes the underline */
+}
+
 .navbar {
   background: #f9f9f9;
   padding: 1rem 2rem;
@@ -307,7 +323,7 @@ a:hover {
 }
 
 .navbar-content {
-  max-width: 1200px;
+  max-width: 2500px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -529,7 +545,6 @@ footer {
   padding: 0;
   box-sizing: border-box;
 }
-
 
 .card-container {
   margin-top: 100px;
